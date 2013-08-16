@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package iComando;
+package iGeradorComandos;
 
 /**
  * Interface que define o funcionamento de uma classe responsável por emitir comandos para formulários.

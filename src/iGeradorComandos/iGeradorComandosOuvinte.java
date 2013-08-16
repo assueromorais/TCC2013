@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package iComando;
+package iGeradorComandos;
 /**
  * Interface que define as funções necessárias para um objeto que deseja aguardar comandos de um objeto que implemente a interface iComandos.
  * @author ASSUERO

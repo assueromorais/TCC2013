@@ -4,7 +4,7 @@
  */
 package TCC_prototipo;
 
-import iComando.iGeradorComandos;
+import iGeradorComandos.iGeradorComandos;
 
 /**
  * Classe principal do projeto.

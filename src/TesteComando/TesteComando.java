@@ -3,8 +3,8 @@
  * and open the template in the editor.
  */
 package TesteComando;
-import iComando.iGeradorComandos;
-import iComando.iGeradorComandosOuvinte;
+import iGeradorComandos.iGeradorComandos;
+import iGeradorComandos.iGeradorComandosOuvinte;
 import javax.swing.event.EventListenerList;
 
 /**
