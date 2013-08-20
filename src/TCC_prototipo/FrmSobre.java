@@ -4,19 +4,30 @@
  */
 package TCC_prototipo;
 
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
+import iGeradorComandos.*;
+import static iGeradorComandos.enmTipoComando.BateriaCritica;
+import static iGeradorComandos.enmTipoComando.DesconectouCabeca;
+import static iGeradorComandos.enmTipoComando.MudarFoco;
+import static iGeradorComandos.enmTipoComando.PortaDesconectada;
+import static iGeradorComandos.enmTipoComando.SelecionarItem;
+import util.JFrameExtensaoComandos;
 
 /**
- * Este formulário contém informações sobre o aplicativo.
- * Inclue informações dos desenvolvedores, da versão atual, dos termos de uso assim como da licença.
+ * Este formulário contém informações sobre o aplicativo. Inclue informações dos
+ * desenvolvedores, da versão atual, dos termos de uso assim como da licença.
+ *
  * @author ASSUERO
  */
-public class FrmSobre extends javax.swing.JFrame {
+public class FrmSobre extends javax.swing.JFrame implements iGeradorComandosOuvinte {
 
     /**
      * Creates new form FrmSobre
      */
     public FrmSobre() {
+        initComponents();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -24,12 +35,17 @@ public class FrmSobre extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+        } catch (Exception e) {// If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        initComponents();
         // Centraliza o formulário
-       this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                TCC.Dispositivos.setVisible(true);
+            }
+        });
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -41,21 +57,69 @@ public class FrmSobre extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnFechar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txpVersion = new javax.swing.JTextPane();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sobre");
+        setResizable(false);
+
+        btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("Sistema desenvolvido em Java.");
+
+        txpVersion.setEditable(false);
+        txpVersion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(txpVersion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addGap(204, 204, 204))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addContainerGap(247, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(214, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(63, 63, 63)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFechar)
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        // TODO add your handling code here:
+        FecharFrame();
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void FecharFrame() {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
 
     /**
      * @param args the command line arguments
@@ -92,5 +156,37 @@ public class FrmSobre extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextPane txpVersion;
     // End of variables declaration//GEN-END:variables
+    
+    /**
+     * Altera o foco dos itens da tela, normalmente botões. Muda o foco do item
+     * que está atualmente com o foco para o próximo item da direita.
+     *
+     * @param args the command line arguments
+     */
+    private void MudarFoco() {
+        if (!btnFechar.hasFocus()) {btnFechar.requestFocus();}
+    }
+    
+    @Override
+    public void ReceberComando(enmTipoComando Comando, String mensagem) {
+        switch (Comando) {
+            case MudarFoco:
+                MudarFoco();
+                break;
+            case SelecionarItem:
+                JFrameExtensaoComandos.SelecionarBotaoFocado(this);
+                break;
+            case DesconectouCabeca:
+                break;
+            case BateriaCritica:
+                break;
+            case PortaDesconectada:
+                break;
+        }
+    }
 }

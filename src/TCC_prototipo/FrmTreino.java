@@ -4,6 +4,12 @@
  */
 package TCC_prototipo;
 
+import Cronometro.Cronometro;
+import Cronometro.CronometroEvento;
+import Cronometro.CronometroOuvinte;
+import java.awt.event.WindowEvent;
+import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 /**
@@ -11,11 +17,13 @@ import javax.swing.UIManager;
  * @author ASSUERO
  */
 public class FrmTreino extends javax.swing.JFrame {
-
+    private Cronometro _crnTreinoIniciar = null;
+    private Date _dtInicioFormulario = null;
     /**
      * Creates new form FrmTreino
      */
     public FrmTreino() {
+        initComponents();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -26,10 +34,31 @@ public class FrmTreino extends javax.swing.JFrame {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        initComponents();
+        _dtInicioFormulario = new Date();
+        _crnTreinoIniciar = new Cronometro(1000);
+        _crnTreinoIniciar.adicionarOuvinte(new CronometroOuvinte() {
+            @Override
+            public void IntervaloOcorreu(CronometroEvento evt) {
+                long lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario,new Date());
+                if(lnDif >= 15) {
+                    _crnTreinoIniciar.Parar();
+                    new FrmTreinoFoco().setVisible(true);
+                    FecharFrame();
+                }
+                else{
+                    lblMensagemCronometro.setText("Em " + (15 - lnDif) + " segundos o treinamento será iniciado.");
+                }
+            }
+
+        });
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
 
+    private void FecharFrame() {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,29 +68,17 @@ public class FrmTreino extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        lblExplicativo = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        lblMensagemTreinamento = new javax.swing.JLabel();
+        lblMensagemCronometro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("Mudar foco 1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        lblMensagemTreinamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMensagemTreinamento.setText("<html>O aplicativo permite ligar e desligar dispositivos com o piscar dos olhos.<br/>Nesta área você irá realizar um treinamento para aprender a mudar o foco<br/> de um item para outro e clicar sobre o item desejado.</html>");
 
-        lblExplicativo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExplicativo.setText("Para mudar o foco de um botão para outro, basta piscar o olho com força uma vez em um intervalo de 3 segundos.");
-
-        jButton2.setText("Mudar foco 2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        lblMensagemCronometro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMensagemCronometro.setText("Em 15 segundos o treinamento será iniciado.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,39 +86,23 @@ public class FrmTreino extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblExplicativo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(116, 116, 116))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMensagemCronometro)
+                    .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lblExplicativo, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(63, 63, 63))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addComponent(lblMensagemCronometro)
+                .addGap(22, 22, 22))
         );
-
-        jButton1.getAccessibleContext().setAccessibleName("Mudar foco 1");
-        jButton2.getAccessibleContext().setAccessibleName("Mudar foco 2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,14 +134,12 @@ public class FrmTreino extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmTreino treinar = new FrmTreino();
-                treinar.setVisible(true);
+                new FrmTreino().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel lblExplicativo;
+    private javax.swing.JLabel lblMensagemCronometro;
+    private javax.swing.JLabel lblMensagemTreinamento;
     // End of variables declaration//GEN-END:variables
 }

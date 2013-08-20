@@ -8,7 +8,7 @@ package iGeradorComandos;
  * Enumeração dos tipos de comando que o iComandos poderá emitir.
  * @author ASSUERO
  */
-public enum enmTipoDeComando
+public enum enmTipoComando
 {
     MudarFoco,
     SelecionarItem,

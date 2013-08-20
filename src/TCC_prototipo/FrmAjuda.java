@@ -4,18 +4,32 @@
  */
 package TCC_prototipo;
 
+import iGeradorComandos.enmTipoComando;
+import iGeradorComandos.enmTipoComando.*;
+import iGeradorComandos.iGeradorComandosOuvinte;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
+import util.JFrameExtensaoComandos;
 
 /**
- * Este formulário contém opções de ajuda para compreender a utilização do sistema.
+ * Este formulário contém opções de ajuda para compreender a utilização do
+ * sistema.
+ *
  * @author ASSUERO
  */
-public class FrmAjuda extends javax.swing.JFrame {
+public class FrmAjuda extends javax.swing.JFrame  implements iGeradorComandosOuvinte {
+    /**
+     * Objeto responsável por alterar o foco para o próximo item da tela.
+     */
+    KeyboardFocusManager _gerenciadorFoco = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
     /**
      * Creates new form FrmAjuda
      */
     public FrmAjuda() {
+        initComponents();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -26,9 +40,20 @@ public class FrmAjuda extends javax.swing.JFrame {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-       initComponents();
-       // Centraliza o formulário
-       this.setLocationRelativeTo(null);
+        // Centraliza o formulário
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                TCC.Dispositivos.setVisible(true);
+            }
+        });
+        this.setLocationRelativeTo(null);
+    }
+
+    private void FecharFrame() {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
     /**
@@ -40,21 +65,43 @@ public class FrmAjuda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnFechar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ajuda");
+
+        btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(590, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(382, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        // TODO add your handling code here:
+        FecharFrame();
+    }//GEN-LAST:event_btnFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,6 +137,30 @@ public class FrmAjuda extends javax.swing.JFrame {
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar;
     // End of variables declaration//GEN-END:variables
+
+    private void MudarFoco() {
+        _gerenciadorFoco.focusNextComponent();
+    }
+    
+    @Override
+    public void ReceberComando(enmTipoComando Comando, String mensagem) {
+        switch (Comando) {
+            case MudarFoco:
+                MudarFoco();
+                break;
+            case SelecionarItem:
+                JFrameExtensaoComandos.SelecionarBotaoFocado(this);
+                break;
+            case DesconectouCabeca:
+                break;
+            case BateriaCritica:
+                break;
+            case PortaDesconectada:
+                break;
+        }
+    }
 }

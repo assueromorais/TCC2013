@@ -24,56 +24,44 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblExplicativo" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblMensagemCronometro" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMensagemTreinamento" alignment="0" min="-2" pref="558" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="lblExplicativo" pref="32" max="32767" attributes="0"/>
-              <EmptySpace pref="141" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+              <Component id="lblMensagemTreinamento" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="200" max="32767" attributes="0"/>
+              <Component id="lblMensagemCronometro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JLabel" name="lblMensagemTreinamento">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mudar foco 1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblExplicativo">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Para mudar o foco de um bot&#xe3;o para outro, basta piscar o olho com for&#xe7;a uma vez em um intervalo de 3 segundos."/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;O aplicativo permite ligar e desligar dispositivos com o piscar dos olhos.&lt;br/&gt;Nesta &#xe1;rea voc&#xea; ir&#xe1; realizar um treinamento para aprender a mudar o foco&lt;br/&gt; de um item para outro e clicar sobre o item desejado.&lt;/html&gt;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JLabel" name="lblMensagemCronometro">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mudar foco 2"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Em 15 segundos o treinamento ser&#xe1; iniciado."/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -3,20 +3,30 @@
  * and open the template in the editor.
  */
 package TCC_prototipo;
-import javax.swing.JButton;
+
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+
 /**
  *
  * @author ASSUERO
  */
 public class FrmMindWaveDesconectado extends javax.swing.JFrame {
+    /**
+     * Atributo que define que o usuário solicitou uma nova tentativa de conexão ao MindWave
+     * Deverá ser acessado pela tela que abriu esta.
+     * @autor ASSUÉRO
+     */
+    public boolean TentarNovamente = false;
 
     /**
      * Creates new form FrmMindWaveDesconectado
      */
     public FrmMindWaveDesconectado() {
-                try {
+        initComponents();
+        try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
@@ -26,9 +36,9 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        initComponents();
-       // Centraliza o formulário
-       this.setLocationRelativeTo(null);
+        // Centraliza o formulário
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -40,22 +50,85 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnEncerrarAplicativo = new javax.swing.JButton();
+        btnTentarNovamente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Falha na conexão");
+        setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        setResizable(false);
+
+        btnEncerrarAplicativo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEncerrarAplicativo.setText("Encerrar aplicativo");
+        btnEncerrarAplicativo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncerrarAplicativoActionPerformed(evt);
+            }
+        });
+
+        btnTentarNovamente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTentarNovamente.setText("Tentar novamente");
+        btnTentarNovamente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTentarNovamenteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("<html>Verifique se o token USB está conectado ao computador e se o headset está ligado.<html/>");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
+        jLabel2.setText("Não foi possível conectar ao headset!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTentarNovamente)
+                .addGap(40, 40, 40)
+                .addComponent(btnEncerrarAplicativo)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel2)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addGap(142, 142, 142)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEncerrarAplicativo)
+                    .addComponent(btnTentarNovamente))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEncerrarAplicativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncerrarAplicativoActionPerformed
+        // Encerra o aplicativo.
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        FecharFrame();
+    }//GEN-LAST:event_btnEncerrarAplicativoActionPerformed
+
+    private void btnTentarNovamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentarNovamenteActionPerformed
+        // Fecha o formulário e seta que deve tentar novamente.
+        TentarNovamente = true;
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        FecharFrame();
+    }//GEN-LAST:event_btnTentarNovamenteActionPerformed
+    private void FecharFrame(){this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));}
     /**
      * @param args the command line arguments
      */
@@ -91,5 +164,9 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEncerrarAplicativo;
+    private javax.swing.JButton btnTentarNovamente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

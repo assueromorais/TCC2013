@@ -4,29 +4,84 @@
  */
 package TCC_prototipo;
 
+import static iGeradorComandos.enmTipoComando.BateriaCritica;
+import static iGeradorComandos.enmTipoComando.DesconectouCabeca;
+import static iGeradorComandos.enmTipoComando.MudarFoco;
+import static iGeradorComandos.enmTipoComando.PortaDesconectada;
+import static iGeradorComandos.enmTipoComando.SelecionarItem;
+import iGeradorComandos.iGeradorComandosOuvinte;
+import java.awt.Color;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import util.JFrameExtensaoComandos;
 
 /**
  *
  * @author ASSUERO
  */
-public class FrmDispositivos extends javax.swing.JFrame {
+public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComandosOuvinte {
+
+    /**
+     * Objeto responsável por alterar o foco para o próximo item da tela.
+     */
+    KeyboardFocusManager _gerenciadorFoco = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                FrmDispositivos dispositivos = new FrmDispositivos();
+                dispositivos.setVisible(true);
+            }
+        });
+    }
 
     /**
      * Creates new form FrmDispositivos
      */
     public FrmDispositivos() {
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+        } catch (Exception e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
+
         }
         initComponents();
+        // Ao receber um comando irá processá-lo
+        TCC.Comandos.AdicionarOuvinte(this);
         this.setLocationRelativeTo(null);
     }
 
@@ -42,9 +97,20 @@ public class FrmDispositivos extends javax.swing.JFrame {
         btnLampada = new javax.swing.JButton();
         btnCampainha = new javax.swing.JButton();
         btnMotor = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
+        mnbMenuSuperior = new javax.swing.JMenuBar();
+        menAjuda = new javax.swing.JMenu();
+        mniConteudoAjuda = new javax.swing.JMenuItem();
+        mniSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Controle de dispositivos");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setForeground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
+        btnLampada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnLampada.setText("Lâmpada");
         btnLampada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +118,7 @@ public class FrmDispositivos extends javax.swing.JFrame {
             }
         });
 
+        btnCampainha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCampainha.setText("Campainha");
         btnCampainha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,12 +126,44 @@ public class FrmDispositivos extends javax.swing.JFrame {
             }
         });
 
+        btnMotor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnMotor.setText("Motor");
         btnMotor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMotorActionPerformed(evt);
             }
         });
+
+        btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
+        menAjuda.setText("Ajuda");
+        menAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        mniConteudoAjuda.setText("Conteúdo da ajuda");
+        mniConteudoAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniConteudoAjudaActionPerformed(evt);
+            }
+        });
+        menAjuda.add(mniConteudoAjuda);
+
+        mniSobre.setText("Sobre");
+        mniSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSobreActionPerformed(evt);
+            }
+        });
+        menAjuda.add(mniSobre);
+
+        mnbMenuSuperior.add(menAjuda);
+
+        setJMenuBar(mnbMenuSuperior);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,16 +177,22 @@ public class FrmDispositivos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(112, 112, 112)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLampada, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCampainha, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addContainerGap())
         );
 
         pack();
@@ -95,54 +200,79 @@ public class FrmDispositivos extends javax.swing.JFrame {
 
     private void btnLampadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLampadaActionPerformed
         // TODO add your handling code here:
+        EnviarComando("lampada:ligar");
     }//GEN-LAST:event_btnLampadaActionPerformed
 
     private void btnCampainhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCampainhaActionPerformed
         // TODO add your handling code here:
+        EnviarComando("campainha:ligar");
     }//GEN-LAST:event_btnCampainhaActionPerformed
 
     private void btnMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorActionPerformed
         // TODO add your handling code here:
+        EnviarComando("motor:ligar");
     }//GEN-LAST:event_btnMotorActionPerformed
 
-        /**
-         * @param args the command line arguments
-         */
-        public static void main(String args[]) {
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-             */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
-                }
-            } catch (ClassNotFoundException ex) {
-                java.util.logging.Logger.getLogger(FrmDispositivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(FrmDispositivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                java.util.logging.Logger.getLogger(FrmDispositivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(FrmDispositivos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-            //</editor-fold>
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        // TODO add your handling code here:
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        FecharFrame();
+    }//GEN-LAST:event_btnFecharActionPerformed
 
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    FrmDispositivos dispositivos = new FrmDispositivos();
-                    dispositivos.setVisible(true);
-                }
-            });
-        }
+    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new FrmSobre().setVisible(true);
+    }//GEN-LAST:event_mniSobreActionPerformed
+
+    private void mniConteudoAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConteudoAjudaActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new FrmAjuda().setVisible(true);
+    }//GEN-LAST:event_mniConteudoAjudaActionPerformed
+
+    private void FecharFrame() {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+
+    /**
+     * Altera o foco dos itens da tela, normalmente botões. Muda o foco do item
+     * que está atualmente com o foco para o próximo item da direita.
+     *
+     * @param args the command line arguments
+     */
+    private void MudarFoco() {
+        _gerenciadorFoco.focusNextComponent();
+    }
+
+    private void EnviarComando(String strComando) {
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCampainha;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnLampada;
     private javax.swing.JButton btnMotor;
+    private javax.swing.JMenu menAjuda;
+    private javax.swing.JMenuBar mnbMenuSuperior;
+    private javax.swing.JMenuItem mniConteudoAjuda;
+    private javax.swing.JMenuItem mniSobre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void ReceberComando(iGeradorComandos.enmTipoComando tipoComando, String mensagem) {
+        switch (tipoComando) {
+            case MudarFoco:
+                MudarFoco();
+                break;
+            case SelecionarItem:
+                JFrameExtensaoComandos.SelecionarBotaoFocado(this);
+                break;
+            case DesconectouCabeca:
+                break;
+            case BateriaCritica:
+                break;
+            case PortaDesconectada:
+                break;
+        }
+    }
 }

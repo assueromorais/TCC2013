@@ -15,6 +15,6 @@ public interface iGeradorComandosOuvinte extends java.util.EventListener {
     * @param Comando: Comando que será enviado para os ouvintes.
     * @param mensagem: Mensagem que poderá ser enviada juntamente com o comando.
     */
-    public void ReceberComando(enmTipoDeComando Comando, String mensagem);
-    
+    public void ReceberComando(enmTipoComando Comando, String mensagem);
+
 }

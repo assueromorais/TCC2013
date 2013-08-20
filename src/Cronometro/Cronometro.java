@@ -17,12 +17,14 @@ public class Cronometro implements Runnable {
     public int Intervalo = 0;
     private boolean _parar = false;
     protected EventListenerList listenerList = new EventListenerList();
+
     private Thread t = null;
     
     public Cronometro(int _intervalo) {
         Intervalo = _intervalo;
         Iniciar();
     }
+    
     public void Iniciar(){
         Parar();
         t = new Thread(this);
@@ -38,9 +40,10 @@ public class Cronometro implements Runnable {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Cronometro.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                if (!_parar){
                 CronometroEvento te = new CronometroEvento(this);
                 // Dispara o evento para os "ouvintes"
-                dispararEvento(te);
+                dispararEvento(te);}
             }
         }
         // Só sai do loop se tiver setado a variável _parar como true, então saí do loop e retorna a variável para false
@@ -54,10 +57,7 @@ public class Cronometro implements Runnable {
      */
     public void Parar() {
         if(t != null){
-            t.interrupt();
-            synchronized (this) {
                 _parar = true;
-            }
         }
     }
     
