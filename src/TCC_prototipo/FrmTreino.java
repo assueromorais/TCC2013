@@ -17,40 +17,56 @@ import javax.swing.UIManager;
  * @author ASSUERO
  */
 public class FrmTreino extends javax.swing.JFrame {
+
     private Cronometro _crnTreinoIniciar = null;
     private Date _dtInicioFormulario = null;
+
     /**
      * Creates new form FrmTreino
      */
     public FrmTreino() {
         initComponents();
+
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         _dtInicioFormulario = new Date();
         _crnTreinoIniciar = new Cronometro(1000);
         _crnTreinoIniciar.adicionarOuvinte(new CronometroOuvinte() {
             @Override
             public void IntervaloOcorreu(CronometroEvento evt) {
-                long lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario,new Date());
-                if(lnDif >= 15) {
+                long lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
+                if (lnDif >= 5) {
                     _crnTreinoIniciar.Parar();
+                    _crnTreinoIniciar.removerOuvinte(this);
                     new FrmTreinoFoco().setVisible(true);
                     FecharFrame();
-                }
-                else{
-                    lblMensagemCronometro.setText("Em " + (15 - lnDif) + " segundos o treinamento será iniciado.");
+                } else {
+                    lblMensagemCronometro.setText("Em " + (5 - lnDif) + " segundos o treinamento será iniciado.");
                 }
             }
-
         });
+        _crnTreinoIniciar.Iniciar();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
@@ -59,6 +75,7 @@ public class FrmTreino extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,10 +90,11 @@ public class FrmTreino extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         lblMensagemTreinamento.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
-        lblMensagemTreinamento.setText("<html>Nesta área você irá realizar um treinamento <br/>para utilizar o aplicativo com destreza.</html>");
+        lblMensagemTreinamento.setText("<html>Nesta área você irá realizar um treinamento <br/>para aprender a utilizar o aplicativo.</html>");
 
         lblMensagemCronometro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblMensagemCronometro.setText("Em 15 segundos o treinamento será iniciado.");

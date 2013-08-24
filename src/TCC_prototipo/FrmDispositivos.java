@@ -254,6 +254,7 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
     }//GEN-LAST:event_mniConteudoAjudaActionPerformed
 
     private void FecharFrame() {
+        TCC.Comandos.RemoverOuvinte(this);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 

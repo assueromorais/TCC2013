@@ -17,7 +17,7 @@ import obter_mindwave.Obter_mindwave;
 public class TCC {
 
     public static iGeradorComandos Comandos;
-    static FrmMindWaveDesconectado MindWaveDesconectado = null;
+    static FrmFalhaMindWave MindWaveDesconectado = null;
 
     /**
      * @param args the command line arguments
@@ -35,7 +35,7 @@ public class TCC {
                 //Conectou ao dispositivo corretamente;
                 new FrmInicio().setVisible(true);
             } else {
-                MindWaveDesconectado = new FrmMindWaveDesconectado();
+                MindWaveDesconectado = new FrmFalhaMindWave();
                 MindWaveDesconectado.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent we) {

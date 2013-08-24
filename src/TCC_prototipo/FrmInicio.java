@@ -91,6 +91,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         //Se passar 30 segundos sem que o usuário faça nada, o sistema irá selecionar automaticamente o formulário de treino.
         _crnTreinoIniciar = new Cronometro(1000);
         _crnTreinoIniciar.adicionarOuvinte(this);
+        _crnTreinoIniciar.Iniciar();
         // Centraliza o formulário
         this.setLocationRelativeTo(null);
     }
@@ -122,7 +123,6 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela inicial");
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -185,6 +185,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void FecharFrame() {
+        TCC.Comandos.RemoverOuvinte(this);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

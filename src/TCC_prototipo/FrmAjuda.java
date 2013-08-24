@@ -37,7 +37,6 @@ public class FrmAjuda extends javax.swing.JFrame implements iGeradorComandosOuvi
         }
         // Centraliza o formulário
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -48,6 +47,7 @@ public class FrmAjuda extends javax.swing.JFrame implements iGeradorComandosOuvi
     }
 
     private void FecharFrame() {
+        TCC.Comandos.RemoverOuvinte(this);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
@@ -64,6 +64,7 @@ public class FrmAjuda extends javax.swing.JFrame implements iGeradorComandosOuvi
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ajuda");
+        setBackground(new java.awt.Color(255, 255, 255));
 
         btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnFechar.setText("Fechar");
@@ -85,7 +86,7 @@ public class FrmAjuda extends javax.swing.JFrame implements iGeradorComandosOuvi
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(382, Short.MAX_VALUE)
+                .addContainerGap(385, Short.MAX_VALUE)
                 .addComponent(btnFechar)
                 .addContainerGap())
         );

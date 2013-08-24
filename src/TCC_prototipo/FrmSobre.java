@@ -59,6 +59,7 @@ public class FrmSobre extends javax.swing.JFrame implements iGeradorComandosOuvi
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sobre");
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -113,6 +114,7 @@ public class FrmSobre extends javax.swing.JFrame implements iGeradorComandosOuvi
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void FecharFrame() {
+        TCC.Comandos.RemoverOuvinte(this);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 

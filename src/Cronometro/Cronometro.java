@@ -4,6 +4,7 @@
  */
 package Cronometro;
 
+import TCC_prototipo.FrmTreinoFoco;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.EventListenerList;
@@ -22,7 +23,6 @@ public class Cronometro implements Runnable {
     
     public Cronometro(int _intervalo) {
         Intervalo = _intervalo;
-        Iniciar();
     }
     
     public void Iniciar(){
@@ -92,5 +92,4 @@ public class Cronometro implements Runnable {
             }
         }
     }
-
 }

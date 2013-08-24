@@ -4,6 +4,7 @@
  */
 package TCC_prototipo;
 
+import iGeradorComandos.enmTipoComando;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -13,18 +14,24 @@ import javax.swing.UIManager.LookAndFeelInfo;
  *
  * @author ASSUERO
  */
-public class FrmMindWaveDesconectado extends javax.swing.JFrame {
+public class FrmFalhaMindWave extends javax.swing.JFrame {
+
     /**
-     * Atributo que define que o usuário solicitou uma nova tentativa de conexão ao MindWave
-     * Deverá ser acessado pela tela que abriu esta.
+     * Atributo que define que o usuário solicitou uma nova tentativa de conexão
+     * ao MindWave Deverá ser acessado pela tela que abriu esta.
+     *
      * @autor ASSUÉRO
      */
     public boolean TentarNovamente = false;
+    /**
+     * Falha recebida pelo leitor do Mind Wave.
+     */
+    public enmTipoComando Comando = null;
 
     /**
-     * Creates new form FrmMindWaveDesconectado
+     * Creates new form FrmFalhaMindWave
      */
-    public FrmMindWaveDesconectado() {
+    public FrmFalhaMindWave() {
         initComponents();
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -33,12 +40,31 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+        } catch (Exception e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
+
         }
+        this.setSize(600, 400);
         // Centraliza o formulário
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        ConfigurarMensagem(Comando);
+    }
+
+    /**
+     *
+     */
+    private void ConfigurarMensagem(enmTipoComando Comando) {
+        switch (Comando) {
+            case BateriaCritica:
+                
+                break;
+            case DesconectouCabeca:
+                
+                break;
+            case PortaDesconectada:
+                
+                break;
+        }
     }
 
     /**
@@ -57,6 +83,7 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Falha na conexão");
+        setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         setResizable(false);
 
@@ -128,7 +155,10 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         FecharFrame();
     }//GEN-LAST:event_btnTentarNovamenteActionPerformed
-    private void FecharFrame(){this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));}
+    private void FecharFrame() {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -146,20 +176,20 @@ public class FrmMindWaveDesconectado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMindWaveDesconectado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFalhaMindWave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMindWaveDesconectado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFalhaMindWave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMindWaveDesconectado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFalhaMindWave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMindWaveDesconectado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFalhaMindWave.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMindWaveDesconectado().setVisible(true);
+                new FrmFalhaMindWave().setVisible(true);
             }
         });
     }

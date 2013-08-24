@@ -4,10 +4,16 @@
  */
 package TCC_prototipo;
 
+import Cronometro.Cronometro;
+import Cronometro.CronometroEvento;
+import Cronometro.CronometroOuvinte;
 import iGeradorComandos.enmTipoComando;
 import iGeradorComandos.iGeradorComandosOuvinte;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import util.JFrameExtensaoComandos;
@@ -16,12 +22,24 @@ import util.JFrameExtensaoComandos;
  *
  * @author ASSUERO
  */
-public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComandosOuvinte {
+public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComandosOuvinte, FocusListener, CronometroOuvinte {
 
     /**
      * Objeto responsável por alterar o foco para o próximo item da tela.
      */
     KeyboardFocusManager _gerenciadorFoco = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+    
+    /**
+     * Data e hora em que o formulário irá iniciar.
+     * 
+     */
+    Date _dtInicioFormulario;
+    
+    /**
+     * Cronometro responsável por abrir novamente o treino de foco. 
+     * O cronômetro irá iniciar quando o último botão for exibido.
+     */
+    private Cronometro _crnEtapaReiniciar = null;
 
     /**
      * Creates new form FrmTreinoFoco
@@ -40,9 +58,18 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         initComponents();
         btnFoco2.setEnabled(false);
         btnFoco3.setEnabled(false);
+        btnFoco1.addFocusListener(this);
+        btnFoco2.addFocusListener(this);
+        btnFoco3.addFocusListener(this);
+        btnProsseguir.addFocusListener(this);
         btnProsseguir.setVisible(false);
+        lblReiniciarTreino.setVisible(false);
+        TCC.Comandos.AdicionarOuvinte(this);
+        _crnEtapaReiniciar = new Cronometro(1000);
+        _crnEtapaReiniciar.adicionarOuvinte(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        _dtInicioFormulario = new Date();
     }
 
     /**
@@ -58,16 +85,19 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         lblExplicativo = new javax.swing.JLabel();
         btnFoco2 = new javax.swing.JButton();
         btnProsseguir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnInicioDoFoco = new javax.swing.JButton();
         btnFoco3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblTituloTreino = new javax.swing.JLabel();
+        lblReiniciarTreino = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Treinamento");
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         btnFoco1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnFoco1.setText("Foco 1");
+        btnFoco1.setNextFocusableComponent(btnFoco2);
         btnFoco1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFoco1ActionPerformed(evt);
@@ -80,6 +110,7 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
 
         btnFoco2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnFoco2.setText("Foco 2");
+        btnFoco2.setNextFocusableComponent(btnFoco3);
         btnFoco2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFoco2ActionPerformed(evt);
@@ -94,19 +125,24 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
             }
         });
 
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
+        btnInicioDoFoco.setBorder(null);
+        btnInicioDoFoco.setBorderPainted(false);
+        btnInicioDoFoco.setNextFocusableComponent(btnFoco1);
 
         btnFoco3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnFoco3.setText("Foco 3");
+        btnFoco3.setNextFocusableComponent(btnProsseguir);
         btnFoco3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFoco3ActionPerformed(evt);
             }
         });
 
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
+        lblTituloTreino.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        lblTituloTreino.setText("ETAPA 1 - FOCANDO NOS BOTÕES");
+
+        lblReiniciarTreino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblReiniciarTreino.setText("Aguarde 10 segundos para esta etapa ser reiniciada.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,50 +151,46 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
             .addGroup(layout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addComponent(btnFoco1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFoco2)
                 .addGap(116, 116, 116))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnProsseguir)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnFoco3)
-                        .addGap(245, 245, 245))))
-            .addComponent(lblExplicativo, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(lblExplicativo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloTreino)
+                    .addComponent(btnInicioDoFoco))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(293, 293, 293)
-                    .addComponent(jButton1)
-                    .addContainerGap(293, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFoco3)
+                .addGap(245, 245, 245))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblReiniciarTreino)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnProsseguir)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2)
-                .addGap(29, 29, 29)
-                .addComponent(lblExplicativo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(btnInicioDoFoco)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTituloTreino)
+                .addGap(18, 18, 18)
+                .addComponent(lblExplicativo, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFoco1)
                     .addComponent(btnFoco2))
                 .addGap(44, 44, 44)
                 .addComponent(btnFoco3)
                 .addGap(31, 31, 31)
-                .addComponent(btnProsseguir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnProsseguir)
+                    .addComponent(lblReiniciarTreino))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(224, 224, 224)
-                    .addComponent(jButton1)
-                    .addContainerGap(75, Short.MAX_VALUE)))
         );
 
         pack();
@@ -180,7 +212,10 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
     }//GEN-LAST:event_btnFoco3ActionPerformed
 
     private void FecharFrame() {
+        _crnEtapaReiniciar.Parar();
+        _crnEtapaReiniciar.removerOuvinte(this);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        TCC.Comandos.RemoverOuvinte(this);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
@@ -223,10 +258,11 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
     private javax.swing.JButton btnFoco1;
     private javax.swing.JButton btnFoco2;
     private javax.swing.JButton btnFoco3;
+    private javax.swing.JButton btnInicioDoFoco;
     private javax.swing.JButton btnProsseguir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblExplicativo;
+    private javax.swing.JLabel lblReiniciarTreino;
+    private javax.swing.JLabel lblTituloTreino;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -236,7 +272,7 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
      * @param args the command line arguments
      */
     private void MudarFoco() {
-         JFrameExtensaoComandos.MudarFoco();
+        JFrameExtensaoComandos.MudarFoco();
     }
 
     @Override
@@ -254,6 +290,44 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
                 break;
             case PortaDesconectada:
                 break;
+        }
+    }
+
+    @Override
+    public void focusGained(FocusEvent fe) {
+            if (fe.getComponent().getClass() != null && fe.getComponent().getClass().getName().contains("JButton")) {
+            if (fe.getComponent() == btnFoco1) {
+                btnFoco2.setEnabled(true);
+            } else {
+                if (fe.getComponent() == btnFoco2) {
+                    btnFoco3.setEnabled(true);
+                } else {
+                    if (fe.getComponent() == btnFoco3) {
+                        btnProsseguir.setVisible(true);
+                        this.lblReiniciarTreino.setVisible(true);
+                        _crnEtapaReiniciar.Iniciar();
+                    } else {
+                        if (btnProsseguir.hasFocus()) {
+                            btnProsseguir.doClick();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void focusLost(FocusEvent fe) {
+    }
+
+    @Override
+    public void IntervaloOcorreu(CronometroEvento evt) {
+        long lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
+        if (lnDif >= 10) {
+            new FrmTreinoFoco().setVisible(true);
+            FecharFrame();
+        } else {
+            lblReiniciarTreino.setText("Em " + (10 - lnDif) + " segundos esta etapa será reiniciada.");
         }
     }
 }
