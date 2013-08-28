@@ -61,7 +61,6 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
         btnClique2 = new javax.swing.JButton();
         btnProsseguir = new javax.swing.JButton();
         btnClique3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblReiniciarTreino = new javax.swing.JLabel();
 
@@ -101,14 +100,11 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("<html>Parabéns, você chegou ao final do treinamento! <br/>Agora está apto a utilizar o aplicativo. Clique em \"Prosseguir\" para acessar os dispositivos.</html>");
-
         jLabel2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         jLabel2.setText("ETAPA 2 - TREINANDO O CLIQUE");
 
         lblReiniciarTreino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblReiniciarTreino.setText("Aguarde 10 segundos para esta etapa ser reiniciada.");
+        lblReiniciarTreino.setText("Aguarde 25 segundos para esta etapa ser reiniciada.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,15 +125,12 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addComponent(btnClique3))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,9 +143,7 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
                     .addComponent(btnClique2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(btnClique3)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProsseguir)
                     .addComponent(lblReiniciarTreino))
@@ -238,7 +229,6 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
     private javax.swing.JButton btnClique2;
     private javax.swing.JButton btnClique3;
     private javax.swing.JButton btnProsseguir;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblReiniciarTreino;
     // End of variables declaration//GEN-END:variables
@@ -262,12 +252,12 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
 
     @Override
     public void IntervaloOcorreu(CronometroEvento evt) {
-        long lnDif = util.Data.DiferencaEmSegundos(_dtInicioProsseguir, new Date());
-        if (lnDif >= 10) {
+        double lnDif = util.Data.DiferencaEmSegundos(_dtInicioProsseguir, new Date());
+        if (lnDif >= 25) {
             new FrmTreinoClique().setVisible(true);
             FecharFrame();
         } else {
-            lblReiniciarTreino.setText("Em " + (10 - lnDif) + " segundos esta etapa será reiniciada.");
+            lblReiniciarTreino.setText("Em " + (int) (25 - lnDif) + " segundos esta etapa será reiniciada.");
         }
     }
 }

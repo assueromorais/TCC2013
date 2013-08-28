@@ -4,10 +4,10 @@
  */
 package movemente;
 
-import com.neurosky.thinkgear.ThinkGear;
 import iGeradorComandos.enmTipoComando;
 
 import iGeradorComandos.iGeradorComandos;
+import iControladorDispositivos.iControladorDispositivos;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import obter_mindwave.Obter_mindwave;
@@ -21,6 +21,7 @@ public class MoveMente {
     public static iGeradorComandos Comandos;
     public static FrmFalhaMindWave MindWaveDesconectado = null;
     private static FrmSplashScreen SplashScreen = null;
+    public static iControladorDispositivos Controlador;
 
     /**
      * @param args the command line arguments
@@ -38,13 +39,12 @@ public class MoveMente {
     public static void IniciarConexaoHeadset() {
         if (Comandos != null) {
             if (Comandos.Iniciar()) {
-                //if (true) {
                 //Conectou ao dispositivo corretamente;
                 new FrmInicio().setVisible(true);
             } else {
                 MindWaveDesconectado = new FrmFalhaMindWave();
                 MindWaveDesconectado.TentarNovamente = true;
-                MindWaveDesconectado.ConfigurarMensagem( enmTipoComando.MindWaveNaoEncontrado, "");
+                MindWaveDesconectado.ConfigurarMensagem(enmTipoComando.MindWaveNaoEncontrado, "");
                 MindWaveDesconectado.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent we) {
@@ -57,7 +57,6 @@ public class MoveMente {
                 });
                 //Exibe a mensagem de falha na conexão com o Mind wave.
                 MindWaveDesconectado.setVisible(true);
-                //new FrmInicio().setVisible(false);
             }
         }
     }

@@ -54,14 +54,14 @@ public class FrmTreino extends javax.swing.JFrame {
         _crnTreinoIniciar.adicionarOuvinte(new CronometroOuvinte() {
             @Override
             public void IntervaloOcorreu(CronometroEvento evt) {
-                long lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
+                double lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
                 if (lnDif >= 15) {
                     _crnTreinoIniciar.Parar();
                     _crnTreinoIniciar.removerOuvinte(this);
                     new FrmTreinoFoco().setVisible(true);
                     FecharFrame();
                 } else {
-                    lblMensagemCronometro.setText("Em " + (15 - lnDif) + " segundos o treinamento será iniciado.");
+                    lblMensagemCronometro.setText("Em " + (int) (15 - lnDif) + " segundos o treinamento será iniciado.");
                 }
             }
         });

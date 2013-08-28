@@ -98,12 +98,12 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
 
     @Override
     public void IntervaloOcorreu(CronometroEvento evt) {
-        long lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
+        double lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
         if (lnDif >= 30) {
             btnTreinar.doClick();
             _crnTreinoIniciar.Parar();
         } else {
-            lblMsgTempoTreino.setText("Em " + (30 - lnDif) + " segundos o treino será aberto automaticamente.");
+            lblMsgTempoTreino.setText("Em " + (int)(30 - lnDif) + " segundos o treino será aberto automaticamente.");
         }
     }
 

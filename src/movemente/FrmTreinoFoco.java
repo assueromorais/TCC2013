@@ -139,7 +139,7 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         lblTituloTreino.setText("ETAPA 1 - FOCANDO NOS BOTÕES");
 
         lblReiniciarTreino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblReiniciarTreino.setText("Aguarde 10 segundos para esta etapa ser reiniciada.");
+        lblReiniciarTreino.setText("Aguarde 25 segundos para esta etapa ser reiniciada.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,12 +320,12 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
 
     @Override
     public void IntervaloOcorreu(CronometroEvento evt) {
-        long lnDif = util.Data.DiferencaEmSegundos(_dtInicioProsseguir, new Date());
-        if (lnDif >= 10) {
+        double lnDif = util.Data.DiferencaEmSegundos(_dtInicioProsseguir, new Date());
+        if (lnDif >= 25) {
             new FrmTreinoFoco().setVisible(true);
             FecharFrame();
         } else {
-            lblReiniciarTreino.setText("Em " + (10 - lnDif) + " segundos esta etapa será reiniciada.");
+            lblReiniciarTreino.setText("Em " + (int) (25 - lnDif) + " segundos esta etapa será reiniciada.");
         }
     }
 }

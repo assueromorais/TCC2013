@@ -34,7 +34,6 @@ public class Obter_mindwave implements iGeradorComandos, Runnable {
             intConexaoID = ThinkGear.GetNewConnectionId(); // Obtém uma noca conexão com o headset
         }
         ThinkGear.Connect(intConexaoID, strCOM.toString(), ThinkGear.BAUD_57600, ThinkGear.STREAM_PACKETS); // Conexão com o headset
-        ThinkGear.EnableAutoRead(intConexaoID, 1); // Habilitar a auto leitura
         /* Inicio de lixo
          FileWriter arq = null;
          try {
@@ -107,7 +106,7 @@ public class Obter_mindwave implements iGeradorComandos, Runnable {
                  // Fim de lixo */
 
                 // Condicionais para teste
-                if (ultimoPiscar > 130 && util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date()) > 1) {
+                if (ultimoPiscar > 130 && util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date()) > 0.6) {
                     ultimoPiscar = 0;
                     DispararEvento(enmTipoComando.MudarFoco, "Mudar foco");
                 } else {
