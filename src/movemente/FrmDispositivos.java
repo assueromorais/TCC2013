@@ -227,10 +227,12 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         // TODO add your handling code here:
         booMotorLigado = !booMotorLigado;
         if (booMotorLigado) {
-            EnviarComando("motor:desligar");
+            //EnviarComando("motor:desligar");
+            EnviarComando("0");
             System.out.println("motor:desligar");
         } else {
-            EnviarComando("motor:ligar");
+            //EnviarComando("motor:ligar");
+            EnviarComando("1");
             System.out.println("motor:ligar");
         }
     }//GEN-LAST:event_btnMotorActionPerformed
@@ -269,6 +271,7 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
     }
 
     private void EnviarComando(String strComando) {
+        MoveMente.Controlador.EnviarComando(strComando);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCampainha;

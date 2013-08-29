@@ -33,7 +33,7 @@ public class Obter_mindwave implements iGeradorComandos, Runnable {
         while (intConexaoID == 0) {
             intConexaoID = ThinkGear.GetNewConnectionId(); // Obtém uma noca conexão com o headset
         }
-        ThinkGear.Connect(intConexaoID, strCOM.toString(), ThinkGear.BAUD_57600, ThinkGear.STREAM_PACKETS); // Conexão com o headset
+        ThinkGear.Connect(intConexaoID, strCOM.toString(), ThinkGear.BAUD_9600, ThinkGear.STREAM_PACKETS); // Conexão com o headset
         /* Inicio de lixo
          FileWriter arq = null;
          try {
@@ -52,14 +52,18 @@ public class Obter_mindwave implements iGeradorComandos, Runnable {
         //System.out.println("Sinal Fraco|Atenção|Piscar|Meditacao|Alpha1|Alpha2|Beta1|Beta2|Delta|Gamma1|Gamma2|Theta");
         System.out.println("Sinal Fraco|Atenção|Piscar|Beta1|Beta2|Gamma1|Gamma2");
         String oldSoma = "";
-        ThinkGear.EnableBlinkDetection(intConexaoID, 1); // Habilitar o teste de piscar os olhos
-        ThinkGear.ReadPackets(intConexaoID, 1); // Leitura de pacotes
-        double ultimoPiscar = 0.0;
         Date dtUltimoPiscar = null;
+        ThinkGear.EnableBlinkDetection(intConexaoID, 1); // Habilitar o teste de piscar os olhos
+        double ultimoPiscar = 0.0;
+        double douPiscar = 0.0; // Obtém os dados de piscar
+        double statusPiscar = 0; //
         while (!booParar) {
             synchronized (this) { // Evita que outra thread misture com essa
                 //System.out.print(ThinkGear.GetValueStatus(intConexaoID, ThinkGear.TG_DATA_BLINK_STRENGTH) + " - ");
-                double douPiscar = ThinkGear.GetValue(intConexaoID, ThinkGear.TG_DATA_BLINK_STRENGTH); // Obtém os dados de piscar
+
+                ThinkGear.ReadPackets(intConexaoID, 1); // Leitura de pacotes
+                douPiscar = ThinkGear.GetValue(intConexaoID, ThinkGear.TG_DATA_BLINK_STRENGTH); // Obtém os dados de piscar
+                statusPiscar = ThinkGear.GetValueStatus(intConexaoID, ThinkGear.TG_DATA_BLINK_STRENGTH); // Obtém os dados de piscar
                 /*double douBateria = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_BATTERY);
                  double douSinalFraco = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_POOR_SIGNAL); // Obtém sinais fracos do headset, geralmente ocorre quando o headset está fora da cabeça
                  double douAtencao = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_ATTENTION); // Obtém os dados de atenção
@@ -72,33 +76,48 @@ public class Obter_mindwave implements iGeradorComandos, Runnable {
                  double douGamma1 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_GAMMA1); // Obtém os dados de Gamma1 (Relacionada com alguns sentidos e memória)
                  double douGamma2 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_GAMMA2); // Obtém os dados de Gamma2 (Relacionada com alguns sentidos e memória)
                  double douTheta = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_THETA); // Obtém os dados de Theta (Sonolência e relaxamento profundo)
-                 * /
-                 * 
-                 //double douSomaSinais = 0.0;
-                 //float floDivisao = 0;
+                 */
+                //double douSomaSinais = 0.0;
+                //float floDivisao = 0;
+                if (statusPiscar != 0) {
+                    double difSegundos = 0.0;
+                    if (dtUltimoPiscar != null) {
+                        difSegundos=util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date());
+                    }
+                    String douSomaSinais = (douPiscar) + "|" + (statusPiscar) + ": " + difSegundos + " segundos";//(douAtencao) + "|" + (douPiscar) + "|" + (douMeditacao) + "|" + (douAlpha1) + "|" + (douAlpha2) + "|" + (douBeta1) + "|" + (douBeta2) + "|" + (douDelta) + "|" + (douGamma1) + "|" + (douGamma2) + "|" + (douTheta) + "|" + (douBateria);
+                    if (douSomaSinais != oldSoma) {
+                        oldSoma = douSomaSinais;
+                        System.out.println(douSomaSinais);
+                    }
+                    // Analisa se deve enviar os comandos
+                    if (ultimoPiscar > 130 && difSegundos > 1) {
+                        ultimoPiscar = 0;
+                        DispararEvento(enmTipoComando.MudarFoco, "Mudar foco");
+                    } else {
+                        if (douPiscar > 130 && douPiscar != ultimoPiscar) {
+                            if (ultimoPiscar > 120) {
+                                ultimoPiscar = 0;
+                                DispararEvento(enmTipoComando.SelecionarItem, "Selecionar item");
+                            } else {
+                                ultimoPiscar = douPiscar;
+                            }
+                            dtUltimoPiscar = new Date();
+                        }
+                    }
+                }
 
-                 String douSomaSinais = (douPiscar) + "|";//(douAtencao) + "|" + (douPiscar) + "|" + (douMeditacao) + "|" + (douAlpha1) + "|" + (douAlpha2) + "|" + (douBeta1) + "|" + (douBeta2) + "|" + (douDelta) + "|" + (douGamma1) + "|" + (douGamma2) + "|" + (douTheta) + "|" + (douBateria);
-                 if (douSomaSinais != oldSoma) {
-                 oldSoma = douSomaSinais;
-                 System.out.println(douSomaSinais);
-                 }
-                
-                 //double douSomaSinais = ValidacaoLogDouble(douSinalFraco) + ValidacaoLogDouble(douAtencao) + ValidacaoLogDouble(douPiscar) + ValidacaoLogDouble(douMeditacao) + ValidacaoLogDouble(douAlpha1) + ValidacaoLogDouble(douAlpha2) + ValidacaoLogDouble(douBeta1) + ValidacaoLogDouble(douBeta2) + ValidacaoLogDouble(douDelta) + ValidacaoLogDouble(douGamma1) + ValidacaoLogDouble(douGamma2) + ValidacaoLogDouble(douTheta);
-                 //floDivisao = (float) (douSomaSinais / 12);
-
-                 //String strArquivo = douSinalFraco + "|" + douAtencao + "|" + douPiscar + "|" + douBeta1 + "|" + douBeta2 + "|" + douGamma1 + "|" + douGamma2;
-
-                 /* Inicio de lixo
+                //double douSomaSinais = ValidacaoLogDouble(douSinalFraco) + ValidacaoLogDouble(douAtencao) + ValidacaoLogDouble(douPiscar) + ValidacaoLogDouble(douMeditacao) + ValidacaoLogDouble(douAlpha1) + ValidacaoLogDouble(douAlpha2) + ValidacaoLogDouble(douBeta1) + ValidacaoLogDouble(douBeta2) + ValidacaoLogDouble(douDelta) + ValidacaoLogDouble(douGamma1) + ValidacaoLogDouble(douGamma2) + ValidacaoLogDouble(douTheta);
+                //floDivisao = (float) (douSomaSinais / 12);
+                //String strArquivo = douSinalFraco + "|" + douAtencao + "|" + douPiscar + "|" + douBeta1 + "|" + douBeta2 + "|" + douGamma1 + "|" + douGamma2;
+                /* Inicio de lixo
                  String strArquivo = douSinalFraco + "|" + douAtencao + "|" + douPiscar + "|" + douMeditacao + "|" + douAlpha1 + "|" + douAlpha2;
                  strArquivo += "|" + douBeta1 + "|" + douBeta2 + "|" + douDelta + "|" + douGamma1 + "|" + douGamma2 + "|" + douTheta;
-
                  if (strArquivo == null ? strArquivoOLD != null : !strArquivo.equals(strArquivoOLD)) {
                  System.out.println(strArquivo + " - " + intTeste);
                  strArquivoOLD = strArquivo;
                  gravarArq.println(strArquivo);
                  intTeste++;
                  }
-
                  if (intTeste == 104) {
                  booParar = true;
                  }
@@ -106,25 +125,12 @@ public class Obter_mindwave implements iGeradorComandos, Runnable {
                  // Fim de lixo */
 
                 // Condicionais para teste
-                if (ultimoPiscar > 130 && util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date()) > 0.6) {
-                    ultimoPiscar = 0;
-                    DispararEvento(enmTipoComando.MudarFoco, "Mudar foco");
-                } else {
-                    if (douPiscar > 130 && douPiscar != ultimoPiscar) {
-                        if (ultimoPiscar > 0) {
-                            ultimoPiscar = 0;
-                            DispararEvento(enmTipoComando.SelecionarItem, "Selecionar item");
-                        } else {
-                            ultimoPiscar = douPiscar;
-                            dtUltimoPiscar = new Date();
-                        }
-                    }
-                }
+
                 //float floDivisao = ValidacaoLogDouble(douPiscar);
 
                 //floDivisao = (float) douPiscar;
                 //if (douPiscar != 0.0) {
-                  System.out.println(douPiscar + "");
+                //System.out.println(douPiscar + "");
                 //}
 
                 /*if (douSinalFraco >= 100) {

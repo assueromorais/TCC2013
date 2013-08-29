@@ -4,6 +4,7 @@
  */
 package movemente;
 
+import controladorDispositivos.ControladorDispositivos;
 import iGeradorComandos.enmTipoComando;
 
 import iGeradorComandos.iGeradorComandos;
@@ -31,6 +32,7 @@ public class MoveMente {
         SplashScreen = new FrmSplashScreen();
         SplashScreen.setVisible(true);
         Comandos = new Obter_mindwave();
+        Controlador = new ControladorDispositivos();
         IniciarConexaoHeadset();
         SplashScreen.setVisible(false);
         SplashScreen = null;

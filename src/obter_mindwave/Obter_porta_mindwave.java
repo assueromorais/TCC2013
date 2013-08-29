@@ -66,7 +66,7 @@ public class Obter_porta_mindwave {
                 intTempoEspera = intTempoEspera / 2;
             }
 
-            if (douSinal > 0) { // Verifica se sinal do mindwave
+            if (douSinal > 0.0) { // Verifica se sinal do mindwave
                 booAtivo = true; // Informa que foi encontrada porta
                 strPortaUsada = mstrInversaoCOM.get(intIndicePorcaCom); // Informa a porta que está ativa
                 ThinkGear.Disconnect(intIdConexao); // Desconecta para próxima conexão

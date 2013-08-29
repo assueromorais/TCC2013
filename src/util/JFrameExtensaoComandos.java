@@ -28,7 +28,8 @@ public class JFrameExtensaoComandos {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Component focado = _frame.getFocusOwner();
-                if (focado.getClass().getName().toLowerCase().contains("jbutton")) {
+                
+                if (focado != null && focado.getClass().getName().toLowerCase().contains("jbutton")) {
                     JButton botaoFoco = (JButton) focado;
                     botaoFoco.doClick();
                 }
