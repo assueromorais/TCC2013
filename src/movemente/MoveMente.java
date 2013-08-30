@@ -11,7 +11,7 @@ import iGeradorComandos.iGeradorComandos;
 import iControladorDispositivos.iControladorDispositivos;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import obter_mindwave.Obter_mindwave;
+import obter_mindwave.ObterMindwave;
 
 /**
  *
@@ -31,7 +31,7 @@ public class MoveMente {
         // TODO code application logic here
         SplashScreen = new FrmSplashScreen();
         SplashScreen.setVisible(true);
-        Comandos = new Obter_mindwave();
+        Comandos = new ObterMindwave();
         Controlador = new ControladorDispositivos();
         IniciarConexaoHeadset();
         SplashScreen.setVisible(false);

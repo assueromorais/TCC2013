@@ -10,6 +10,8 @@ import Cronometro.CronometroOuvinte;
 import iGeradorComandos.enmTipoComando;
 import iGeradorComandos.iGeradorComandosOuvinte;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -19,7 +21,7 @@ import util.JFrameExtensaoComandos;
  *
  * @author ASSUERO
  */
-public class FrmTreinoFocoClique extends javax.swing.JFrame implements iGeradorComandosOuvinte, CronometroOuvinte {
+public class FrmTreinoFocoClique extends javax.swing.JFrame implements iGeradorComandosOuvinte, FocusListener, CronometroOuvinte {
 
     /**
      * Objeto responsável por alterar o foco para o próximo item da tela.
@@ -293,5 +295,19 @@ public class FrmTreinoFocoClique extends javax.swing.JFrame implements iGeradorC
             lblReiniciarTreino.setText("Em " + (int) (25 - lnDif) + " segundos esta etapa será reiniciada.");
         }
 
+    }
+
+    @Override
+    public void focusGained(FocusEvent fe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void focusLost(FocusEvent fe) {
+        if (fe.getComponent().getClass() != null && fe.getComponent().getClass().getName().contains("JButton")) {
+            if (fe.getComponent() == btnFocoClique1) {
+                this.btnInicioDoFoco.setVisible(false);
+            }
+        }
     }
 }

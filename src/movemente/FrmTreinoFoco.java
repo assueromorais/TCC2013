@@ -295,6 +295,7 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         if (fe.getComponent().getClass() != null && fe.getComponent().getClass().getName().contains("JButton")) {
             if (fe.getComponent() == btnFoco1) {
                 btnFoco2.setEnabled(true);
+                btnInicioDoFoco.setVisible(false);
             } else {
                 if (fe.getComponent() == btnFoco2) {
                     btnFoco3.setEnabled(true);
