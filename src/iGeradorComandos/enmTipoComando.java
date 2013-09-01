@@ -15,5 +15,6 @@ public enum enmTipoComando
     DesconectouCabeca,
     BateriaCritica,
     PortaDesconectada,
-    MindWaveNaoEncontrado;
+    MindWaveNaoEncontrado,
+    IdentificouPiscada;
 }

@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -16,22 +13,15 @@ public class TwoWaySerialComm {
     public TwoWaySerialComm() {
         super();
     }
-
     public void connect(String portName) throws Exception {
         CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
         if (portIdentifier.isCurrentlyOwned()) {
             System.out.println("Error: Port is currently in use");
         } else {
             CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000);
-
             if (commPort instanceof SerialPort) {
                 SerialPort serialPort = (SerialPort) commPort;
-                serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-
-                InputStream in = serialPort.getInputStream();
-                OutputStream out = serialPort.getOutputStream();
-                (new Thread(new util.TwoWaySerialComm.SerialReader(in))).start();
-                (new Thread(new util.TwoWaySerialComm.SerialWriter(out))).start();
+                serialPort.setSerialPortParams(57600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
             } else {
                 System.out.println("Error: Only serial ports are handled by this example.");
             }
@@ -39,7 +29,8 @@ public class TwoWaySerialComm {
     }
 
     /**
-     *      */
+     *
+     */
     public static class SerialReader implements Runnable {
 
         InputStream in;
@@ -62,10 +53,11 @@ public class TwoWaySerialComm {
     }
 
     /**
-     *      */
+     *
+     */
     public static class SerialWriter implements Runnable {
 
-        public OutputStream out;
+        OutputStream out;
 
         public SerialWriter(OutputStream out) {
             this.out = out;
@@ -85,7 +77,7 @@ public class TwoWaySerialComm {
 
     public static void main(String[] args) {
         try {
-            (new util.TwoWaySerialComm()).connect("COM6");
+            (new TwoWaySerialComm()).connect("COM6");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

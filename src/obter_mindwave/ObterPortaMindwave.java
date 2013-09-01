@@ -15,7 +15,6 @@ import javax.comm.CommPortIdentifier;
 public class ObterPortaMindwave {
 
     public static String ObterPorta() throws InterruptedException {
-
         boolean booAtivo = false; // Booleano que identificará se foi identificado a porta COM
         String strPortaUsada = ""; // String que conterá a porta COM de comunicação do Headset
         ArrayList<String> mstrInversaoCOM = obterListaPortas(); // Vetor para portas COM
@@ -25,8 +24,10 @@ public class ObterPortaMindwave {
             ThinkGear.FreeConnection(intIdConexao);
             intIdConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
         }
+        System.out.println("Procurando Headset...");
+        System.out.println(mstrInversaoCOM.size() + " porta(s) encontrada(s).");
         for (int intIndicePorcaCom = mstrInversaoCOM.size() - 1; intIndicePorcaCom >= 0; intIndicePorcaCom--) {
-            System.out.println(mstrInversaoCOM.get(intIndicePorcaCom).toString());
+            System.out.println("Testando porta " + mstrInversaoCOM.get(intIndicePorcaCom).toString() + ".");
             // Informa que foi encontrada porta
             booAtivo = TestarSinais(intIdConexao, mstrInversaoCOM.get(intIndicePorcaCom).toString());
             if (booAtivo) { // Verifica se sinal do mindwave                
@@ -34,9 +35,12 @@ public class ObterPortaMindwave {
                 break; // Sai do loop
             }
         }
+        ThinkGear.FreeConnection(intIdConexao); // Limpa espaço de conexão
         if (booAtivo) { // Se existe porta disponível
+            System.out.println("Headset encontrado na porta " + strPortaUsada + ".");
             return strPortaUsada; // Nome da porta
         } else { // Senão retorna vazio
+            System.out.println("Headset não encontrado!");
             return "_"; // Vazio
         }
     }
@@ -66,15 +70,14 @@ public class ObterPortaMindwave {
             Thread.sleep(intTempoEspera); // Aguarda processar sinal no headset
             // GetValue(Código da conexão, Dado desejado)
             douSinal = ThinkGear.GetValue(intIdConexao, ThinkGear.DATA_RAW); // Obtém o valor do mindwave
+            System.out.println("Tentativa " + (intTentativasConexao + 1) + " de 5, espera " + (intTempoEspera / 1000) + " segundos.");
             if (douSinal > 0.0) { // Se sinal for maior que 0 é considerado que obteve sucesso ao tentar conectar
-                System.out.println("Entrou");
+                System.out.println("Porta identificada!");
                 break; // Sai do loop
             }
-            System.out.println(intTempoEspera);
             intTempoEspera = intTempoEspera / 2;
         }
         ThinkGear.Disconnect(intIdConexao); // Desconecta para próxima conexão
-        ThinkGear.FreeConnection(intIdConexao); // Limpa espaço de conexão
         return (douSinal > 0.0);
     }
 }

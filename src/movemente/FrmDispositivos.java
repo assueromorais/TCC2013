@@ -228,7 +228,7 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         booMotorLigado = !booMotorLigado;
         if (booMotorLigado) {
             //EnviarComando("motor:desligar");
-            EnviarComando("0");
+            EnviarComando("1");
             System.out.println("motor:desligar");
         } else {
             //EnviarComando("motor:ligar");

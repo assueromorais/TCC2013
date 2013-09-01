@@ -71,8 +71,8 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
         ThinkGear.EnableBlinkDetection(intConexaoID, 1); // Habilitar o teste de piscar os olhos
         Date dtUltimoPiscar = null;
         double ultimoPiscar = 0.0;
-        double douPiscar = 0.0; // Obtém os dados de piscar
-        boolean booSinalPiscarMudou = false; //
+        double douPiscar; // Obtém os dados de piscar
+        boolean booSinalPiscarMudou; // indica que o último valor capturado da piscada foi atualizado pelo Mind Wave.
         double difSegundos = 0.0;
         while (!booParar) {
             synchronized (this) { // Evita que outra thread misture com essa
@@ -99,7 +99,7 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
                         difSegundos = util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date());
                     }
                     String douSomaSinais = (douPiscar) + " : " + difSegundos + " segundos";//(douAtencao) + "|" + (douPiscar) + "|" + (douMeditacao) + "|" + (douAlpha1) + "|" + (douAlpha2) + "|" + (douBeta1) + "|" + (douBeta2) + "|" + (douDelta) + "|" + (douGamma1) + "|" + (douGamma2) + "|" + (douTheta) + "|" + (douBateria);
-                    if (douSomaSinais != oldSoma) {
+                    if (douSomaSinais == null ? oldSoma != null : !douSomaSinais.equals(oldSoma)) {
                         oldSoma = douSomaSinais;
                         System.out.println(douSomaSinais);
                     }
@@ -126,6 +126,7 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
                                 ultimoPiscar = douPiscar;
                                 dtUltimoPiscar = new Date();
                             }
+                            DispararEvento(enmTipoComando.IdentificouPiscada, "Piscou");
                         }
                     }
                 }

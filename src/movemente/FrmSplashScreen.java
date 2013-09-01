@@ -4,7 +4,15 @@
  */
 package movemente;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
+import static movemente.MoveMente.IniciarConexaoHeadset;
+import static movemente.MoveMente.MindWaveDesconectado;
 
 /**
  * Formulário exibido enquanto a aplicação é carregada, antes que o primeiro
@@ -13,6 +21,8 @@ import javax.swing.UIManager;
  * @author ASSUERO
  */
 public class FrmSplashScreen extends javax.swing.JFrame {
+
+    private OutputStream out;
 
     /**
      * Creates new form FrmSplashScreen
@@ -29,10 +39,34 @@ public class FrmSplashScreen extends javax.swing.JFrame {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
         initComponents();
+        this.txtPrompt.setText("Iniciando aplicativo.\n");
         // Centraliza o formulário
         this.setLocationRelativeTo(null);
-    }
+        out = System.out;
+        System.setOut(new PrintStream(new OutputStream() {
+            public void write(int b) throws IOException {
+                txtPrompt.append(String.valueOf((char) b));
+            }
 
+            public void write(byte[] b, int off, int len) {
+                txtPrompt.append(new String(b, off, len));
+            }
+        }, true));
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                //JFrame frame = () e.getWindow()
+                if (!(e.getWindow().isVisible())) {
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            System.setOut((PrintStream) out);
+                        }
+                    ;
+                }
+        );
+    }
+    }});
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,8 +78,10 @@ public class FrmSplashScreen extends javax.swing.JFrame {
 
         lblTituloAplicacao = new javax.swing.JLabel();
         lblMsgAguarde = new javax.swing.JLabel();
-        lblVersao = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblIconeAguarde = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        scpPrompt = new javax.swing.JScrollPane();
+        txtPrompt = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -54,16 +90,20 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
 
-        lblTituloAplicacao.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        lblTituloAplicacao.setText("MoveMente");
+        lblTituloAplicacao.setFont(new java.awt.Font("Arial", 3, 48)); // NOI18N
+        lblTituloAplicacao.setText("<html><body><u>MoveMente</u> 0.1</body></html>");
 
         lblMsgAguarde.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblMsgAguarde.setText("Aguarde, carregando aplicativo...");
 
-        lblVersao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblVersao.setText("Versão 0.1");
+        lblIconeAguarde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Carregando.gif"))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Carregando.gif"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Logo.png"))); // NOI18N
+
+        txtPrompt.setEditable(false);
+        txtPrompt.setColumns(20);
+        txtPrompt.setRows(5);
+        scpPrompt.setViewportView(txtPrompt);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,33 +112,41 @@ public class FrmSplashScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblVersao))
-                            .addComponent(lblTituloAplicacao)))
+                        .addGap(27, 27, 27)
+                        .addComponent(lblLogo)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTituloAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(186, 186, 186)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMsgAguarde, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(lblIconeAguarde)
+                                .addGap(73, 73, 73)))))
+                .addContainerGap(124, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 134, Short.MAX_VALUE)
-                .addComponent(lblMsgAguarde)
-                .addGap(131, 131, 131))
+                .addContainerGap()
+                .addComponent(scpPrompt)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblTituloAplicacao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblVersao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lblLogo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblTituloAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addComponent(lblIconeAguarde)
                 .addGap(18, 18, 18)
                 .addComponent(lblMsgAguarde)
-                .addGap(84, 84, 84))
+                .addGap(18, 18, 18)
+                .addComponent(scpPrompt, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -130,7 +178,6 @@ public class FrmSplashScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmSplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -139,9 +186,11 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblIconeAguarde;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMsgAguarde;
     private javax.swing.JLabel lblTituloAplicacao;
-    private javax.swing.JLabel lblVersao;
+    private javax.swing.JScrollPane scpPrompt;
+    private javax.swing.JTextArea txtPrompt;
     // End of variables declaration//GEN-END:variables
 }

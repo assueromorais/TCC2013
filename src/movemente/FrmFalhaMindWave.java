@@ -37,6 +37,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
+
         }
         this.setSize(600, 400);
         // Centraliza o formulário
@@ -150,7 +151,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         FecharFrame();
     }//GEN-LAST:event_btnTentarNovamenteActionPerformed
-    
+
     private void FecharFrame() {
         this.setVisible(false);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

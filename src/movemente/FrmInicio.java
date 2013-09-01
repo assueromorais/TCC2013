@@ -120,9 +120,6 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         btnTreinar = new javax.swing.JButton();
         lblMsgTempoTreino = new javax.swing.JLabel();
         btnFechar = new javax.swing.JButton();
-        pnlMensagens = new javax.swing.JPanel();
-        lblTituloMensagens = new javax.swing.JLabel();
-        lblMensagensMindWave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela inicial");
@@ -158,39 +155,6 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
             }
         });
 
-        pnlMensagens.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMensagens.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlMensagens.setFocusable(false);
-
-        lblTituloMensagens.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblTituloMensagens.setText("Status Mind Wave");
-
-        lblMensagensMindWave.setText("Mensagem");
-
-        javax.swing.GroupLayout pnlMensagensLayout = new javax.swing.GroupLayout(pnlMensagens);
-        pnlMensagens.setLayout(pnlMensagensLayout);
-        pnlMensagensLayout.setHorizontalGroup(
-            pnlMensagensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMensagensLayout.createSequentialGroup()
-                .addGroup(pnlMensagensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMensagensLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(lblTituloMensagens))
-                    .addGroup(pnlMensagensLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblMensagensMindWave)))
-                .addContainerGap(110, Short.MAX_VALUE))
-        );
-        pnlMensagensLayout.setVerticalGroup(
-            pnlMensagensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMensagensLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(lblTituloMensagens)
-                .addGap(16, 16, 16)
-                .addComponent(lblMensagensMindWave)
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,21 +162,17 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 588, Short.MAX_VALUE)
+                        .addComponent(btnFechar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMsgTempoTreino)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(lblMsgTempoTreino))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
                                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(99, 99, 99)
                                 .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 161, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(pnlMensagens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFechar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -222,12 +182,10 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(39, 39, 39)
                 .addComponent(lblMsgTempoTreino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFechar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlMensagens, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(btnFechar)
                 .addContainerGap())
         );
 
@@ -263,10 +221,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnTreinar;
-    private javax.swing.JLabel lblMensagensMindWave;
     private javax.swing.JLabel lblMsgTempoTreino;
-    private javax.swing.JLabel lblTituloMensagens;
-    private javax.swing.JPanel pnlMensagens;
     // End of variables declaration//GEN-END:variables
 
     private void MudarFoco() {
