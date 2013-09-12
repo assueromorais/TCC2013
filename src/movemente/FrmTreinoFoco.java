@@ -12,7 +12,6 @@ import iGeradorComandos.iGeradorComandosOuvinte;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.WindowEvent;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -22,7 +21,7 @@ import util.JFrameExtensaoComandos;
  *
  * @author ASSUERO
  */
-public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComandosOuvinte, FocusListener, CronometroOuvinte {
+public class FrmTreinoFoco extends javax.swing.JInternalFrame implements iGeradorComandosOuvinte, FocusListener, CronometroOuvinte {
 
     /**
      * Objeto responsável por alterar o foco para o próximo item da tela.
@@ -66,7 +65,7 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         _crnEtapaReiniciar = new Cronometro(1000);
         _crnEtapaReiniciar.adicionarOuvinte(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
     }
 
     /**
@@ -87,10 +86,11 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         lblTituloTreino = new javax.swing.JLabel();
         lblReiniciarTreino = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Treinamento");
         setBackground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Treinamento");
+        setMaximumSize(new java.awt.Dimension(587, 336));
+        setMinimumSize(new java.awt.Dimension(587, 336));
 
         btnFoco1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnFoco1.setText("Foco 1");
@@ -146,44 +146,50 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(btnFoco1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFoco2)
-                .addGap(116, 116, 116))
-            .addComponent(lblExplicativo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloTreino)
-                    .addComponent(btnInicioDoFoco))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblReiniciarTreino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProsseguir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnInicioDoFoco, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTituloTreino))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblExplicativo, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFoco1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFoco2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFoco3)
-                .addGap(245, 245, 245))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblReiniciarTreino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnProsseguir)
-                .addContainerGap())
+                .addComponent(btnFoco3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(250, 250, 250))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(btnInicioDoFoco)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblTituloTreino)
-                .addGap(18, 18, 18)
-                .addComponent(lblExplicativo, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblExplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInicioDoFoco, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFoco1)
-                    .addComponent(btnFoco2))
-                .addGap(44, 44, 44)
-                .addComponent(btnFoco3)
-                .addGap(31, 31, 31)
+                    .addComponent(btnFoco1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFoco2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnFoco3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProsseguir)
                     .addComponent(lblReiniciarTreino))
@@ -200,7 +206,7 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
     }//GEN-LAST:event_btnFoco2ActionPerformed
 
     private void btnProsseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsseguirActionPerformed
-        new FrmTreinoClique().setVisible(true);
+        MoveMente.Container.AdicionarFrame(new FrmTreinoClique());
         FecharFrame();
     }//GEN-LAST:event_btnProsseguirActionPerformed
 
@@ -213,7 +219,8 @@ public class FrmTreinoFoco extends javax.swing.JFrame implements iGeradorComando
         _crnEtapaReiniciar.removerOuvinte(this);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         MoveMente.Comandos.RemoverOuvinte(this);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        this.hide();
+        this.dispose();
     }
 
     /**

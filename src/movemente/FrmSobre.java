@@ -41,7 +41,8 @@ public class FrmSobre extends javax.swing.JFrame implements iGeradorComandosOuvi
             }
         });
         this.setLocationRelativeTo(null);
-    }
+        util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.

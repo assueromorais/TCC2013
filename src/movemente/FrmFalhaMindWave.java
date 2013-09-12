@@ -43,6 +43,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         // Centraliza o formulário
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
     }
 
     /**
@@ -73,8 +74,8 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
 
         btnEncerrarAplicativo = new javax.swing.JButton();
         btnTentarNovamente = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblMensagem = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Falha na conexão");
@@ -98,11 +99,11 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("<html>Verifique se o token USB está conectado ao computador e se o headset está ligado.<html/>");
+        lblMensagem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMensagem.setText("<html>Verifique se o token USB está conectado ao computador e se o headset está ligado.<html/>");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
-        jLabel2.setText("Não foi possível conectar ao headset!");
+        lblTitulo.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
+        lblTitulo.setText("Não foi possível conectar ao headset!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,17 +118,17 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitulo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jLabel2)
+                .addComponent(lblTitulo)
                 .addGap(43, 43, 43)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addGap(142, 142, 142)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEncerrarAplicativo)
@@ -152,6 +153,9 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         FecharFrame();
     }//GEN-LAST:event_btnTentarNovamenteActionPerformed
 
+    public void setMensagem(String strMensagem ){
+        this.lblMensagem.setText(strMensagem);
+    }
     private void FecharFrame() {
         this.setVisible(false);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -194,7 +198,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEncerrarAplicativo;
     private javax.swing.JButton btnTentarNovamente;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblMensagem;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }

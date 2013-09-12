@@ -14,7 +14,7 @@ public interface iGeradorComandos {
      * Inicia a função que verifica a geração de comandos.
      * @author ASSUERO
      */
-    public boolean Iniciar();
+    public boolean Conectar();
 
     /**
      * Para a função de geração de comandos.
@@ -26,19 +26,19 @@ public interface iGeradorComandos {
      * Estado da bateria do dispositivo I/O.
      * @author ASSUERO
      */
-    public double Bateria = 0.0;
+    public double NivelDaBateria();
     
     /**
      * Estado da bateria do dispositivo I/O.
      * @author ASSUERO
      */
-    public boolean ConectadoNaCabeca = false;
+    public boolean ConectadoNaCabeca();
     
     /**
      * Retorna verdadeiro se a conexão com o dispositivo de I/O estiver ativa.
      * @author ASSUERO
      */
-    public boolean DispositivoConectado = false;
+    public boolean DispositivoConectado();
     
     /**
      * Permite adicionar um ouvinte à uma lista interna de ouvintes do objeto

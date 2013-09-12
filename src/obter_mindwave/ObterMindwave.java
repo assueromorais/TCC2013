@@ -19,24 +19,40 @@ import javax.swing.event.EventListenerList;
  */
 public class ObterMindwave implements iGeradorComandos, Runnable {
 
-    protected EventListenerList eveEscutadores = new EventListenerList(); // Lista de eventos
-    private String strCOM; // Porta COM
-    private Thread thrExecutar; // Thread que será executada para captura de sinas
-    private boolean booParar = true; // Boleano para decisão de parada de thread
+    /**
+     * Lista com os ouvintes que irão receber os comandos da classe.
+     */
+    protected EventListenerList eveEscutadores = new EventListenerList();
+    /**
+     * Porta COM onde o headset está conectado.
+     */
+    private String strCOM;
+    /**
+     * Thread principal da classe, executa a captura de sinais em um loop.
+     */
+    private Thread thrExecutar;
+    /**
+     * Identifica que deve parar de analisar os dados do headset
+     */
+    private boolean booParar = true;
     /**
      * Define a intensidade da piscada para que ela será considerada como um
      * comando. O valor varia de 0 á 255.
      */
-    public int IntensidadePiscada = 110;
+    public int IntensidadePiscada = 105;
     /**
      * Define o intervalo em que deverá ocorrer duas piscadas para que o comando
      * SelecionarItem será disparado. Caso o intervalo seja ultrapassado, o
      * comando MudarFoco será disparado.
      */
-    public int IntervaloPiscadasSelecionarItem = 2;
+    private double IntervaloPiscadasSelecionarItem = 1;
+    /**
+     * ID da conexão atual com o Headset.
+     */
+    private int intIDConexao = 0;
 
     @Override
-    public boolean Iniciar() {
+    public boolean Conectar() {
         try {
             strCOM = ObterPortaMindwave.ObterPorta();
         } catch (InterruptedException ex) {
@@ -50,7 +66,6 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
             thrExecutar = new Thread(this);
             thrExecutar.start();
             return true;
-
         }
     }
 
@@ -59,78 +74,77 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
      */
     @Override
     public void run() {
-        int intConexaoID = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
-        while (intConexaoID == 0) {
-            intConexaoID = ThinkGear.GetNewConnectionId(); // Obtém uma noca conexão com o headset
+        intIDConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
+        while (intIDConexao == 0) {
+            intIDConexao = ThinkGear.GetNewConnectionId(); // Obtém uma noca conexão com o headset
         }
-        ThinkGear.Connect(intConexaoID, strCOM.toString(), ThinkGear.BAUD_9600, ThinkGear.STREAM_PACKETS); // Conexão com o headset
+        ThinkGear.Connect(intIDConexao, strCOM.toString(), ThinkGear.BAUD_9600, ThinkGear.STREAM_PACKETS); // Conexão com o headset
         // Loop enquanto o boleano de parar for falso
         //System.out.println("Sinal Fraco|Atenção|Piscar|Meditacao|Alpha1|Alpha2|Beta1|Beta2|Delta|Gamma1|Gamma2|Theta");
         System.out.println("Sinal Fraco|Atenção|Piscar|Beta1|Beta2|Gamma1|Gamma2");
-        String oldSoma = "";
-        ThinkGear.EnableBlinkDetection(intConexaoID, 1); // Habilitar o teste de piscar os olhos
+        ThinkGear.EnableBlinkDetection(intIDConexao, 1); // Habilitar o teste de piscar os olhos
         Date dtUltimoPiscar = null;
-        double ultimoPiscar = 0.0;
-        double douPiscar; // Obtém os dados de piscar
+        double douUltimoNivelPiscar = 0.0;
+        double douNivelPiscar; // Obtém os dados de piscar
         boolean booSinalPiscarMudou; // indica que o último valor capturado da piscada foi atualizado pelo Mind Wave.
-        double difSegundos = 0.0;
+        float difSegundos = 0;
         while (!booParar) {
             synchronized (this) { // Evita que outra thread misture com essa
-                ThinkGear.ReadPackets(intConexaoID, 1); // Leitura de pacotes
-                douPiscar = ThinkGear.GetValue(intConexaoID, ThinkGear.TG_DATA_BLINK_STRENGTH); // Obtém os dados de piscar
-                booSinalPiscarMudou = (ThinkGear.GetValueStatus(intConexaoID, ThinkGear.TG_DATA_BLINK_STRENGTH) != 0); // Obtém os dados de piscar
-                /*double douBateria = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_BATTERY);
-                 double douSinalFraco = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_POOR_SIGNAL); // Obtém sinais fracos do headset, geralmente ocorre quando o headset está fora da cabeça
-                 double douAtencao = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_ATTENTION); // Obtém os dados de atenção
-                 double douMeditacao = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_MEDITATION); // Obtém os dados de meditação (Meditação)
-                 double douAlpha1 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_ALPHA1); // Obtém os dados de Alpha1 (Relaxamento e meditação)
-                 double douAlpha2 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_ALPHA2); // Obtém os dados de Alpha2 (Relaxamento e meditação)
-                 double douBeta1 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_BETA1); // Obtém os dados de Beta1 (Foco e Atenção)
-                 double douBeta2 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_BETA2); // Obtém os dados de Beta2 (Foco e Atenção)
-                 double douDelta = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_DELTA); // Obtém os dados de Delta (Sono profundo ou inconsciente)
-                 double douGamma1 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_GAMMA1); // Obtém os dados de Gamma1 (Relacionada com alguns sentidos e memória)
-                 double douGamma2 = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_GAMMA2); // Obtém os dados de Gamma2 (Relacionada com alguns sentidos e memória)
-                 double douTheta = ThinkGear.GetValue(intConexaoID, ThinkGear.DATA_THETA); // Obtém os dados de Theta (Sonolência e relaxamento profundo)
+                ThinkGear.ReadPackets(intIDConexao, 1); // Leitura de pacotes
+                douNivelPiscar = ThinkGear.GetValue(intIDConexao, ThinkGear.TG_DATA_BLINK_STRENGTH); // Obtém os dados de piscar
+                booSinalPiscarMudou = (ThinkGear.GetValueStatus(intIDConexao, ThinkGear.TG_DATA_BLINK_STRENGTH) != 0); // Obtém os dados de piscar
+                /*double douBateria = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_BATTERY);
+                 double douSinalFraco = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_POOR_SIGNAL); // Obtém sinais fracos do headset, geralmente ocorre quando o headset está fora da cabeça
+                 double douAtencao = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_ATTENTION); // Obtém os dados de atenção
+                 double douMeditacao = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_MEDITATION); // Obtém os dados de meditação (Meditação)
+                 double douAlpha1 = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_ALPHA1); // Obtém os dados de Alpha1 (Relaxamento e meditação)
+                 double douAlpha2 = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_ALPHA2); // Obtém os dados de Alpha2 (Relaxamento e meditação)
+                 double douBeta1 = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_BETA1); // Obtém os dados de Beta1 (Foco e Atenção)
+                 double douBeta2 = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_BETA2); // Obtém os dados de Beta2 (Foco e Atenção)
+                 double douDelta = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_DELTA); // Obtém os dados de Delta (Sono profundo ou inconsciente)
+                 double douGamma1 = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_GAMMA1); // Obtém os dados de Gamma1 (Relacionada com alguns sentidos e memória)
+                 double douGamma2 = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_GAMMA2); // Obtém os dados de Gamma2 (Relacionada com alguns sentidos e memória)
+                 double douTheta = ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_THETA); // Obtém os dados de Theta (Sonolência e relaxamento profundo)
                  */
                 //double douSomaSinais = 0.0;
                 if (booSinalPiscarMudou) {
-                    // Piscou uma vez 
-                    if (dtUltimoPiscar != null) {
-                        difSegundos = util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date());
-                    }
-                    String douSomaSinais = (douPiscar) + " : " + difSegundos + " segundos";//(douAtencao) + "|" + (douPiscar) + "|" + (douMeditacao) + "|" + (douAlpha1) + "|" + (douAlpha2) + "|" + (douBeta1) + "|" + (douBeta2) + "|" + (douDelta) + "|" + (douGamma1) + "|" + (douGamma2) + "|" + (douTheta) + "|" + (douBateria);
-                    if (douSomaSinais == null ? oldSoma != null : !douSomaSinais.equals(oldSoma)) {
-                        oldSoma = douSomaSinais;
-                        System.out.println(douSomaSinais);
-                    }
+                    // Piscou uma vez
+                    String douSomaSinais = (douNivelPiscar) + " : " + difSegundos + " segundos";//(douAtencao) + "|" + (douNivelPiscar) + "|" + (douMeditacao) + "|" + (douAlpha1) + "|" + (douAlpha2) + "|" + (douBeta1) + "|" + (douBeta2) + "|" + (douDelta) + "|" + (douGamma1) + "|" + (douGamma2) + "|" + (douTheta) + "|" + (douBateria);
+                    System.out.println("Piscou");
+                    System.out.println(douSomaSinais);
+                    DispararEvento(enmTipoComando.Piscou, String.valueOf(douNivelPiscar));
                 }
-
+                if (dtUltimoPiscar != null) {
+                    difSegundos = util.Data.DiferencaEmSegundos(dtUltimoPiscar, new Date());
+                }
                 // Analisa se deve enviar os comandos
-                if (ultimoPiscar >= IntensidadePiscada && difSegundos > IntervaloPiscadasSelecionarItem) {
+                if (douUltimoNivelPiscar >= IntensidadePiscada && difSegundos >= IntervaloPiscadasSelecionarItem && (douNivelPiscar < IntensidadePiscada || !booSinalPiscarMudou)) {
                     // Mesmo o sinal não tendo mudado deverá verificar se houve uma piscada para mudança de foco
                     // Se a última piscada foi maior do que o definido e o intervalo da última piscada for maior do que 1 segundo
-                    ultimoPiscar = 0;
+                    douUltimoNivelPiscar = 0;
                     difSegundos = 0;
+                    dtUltimoPiscar = null;
                     DispararEvento(enmTipoComando.MudarFoco, "Mudar foco");
+                    System.out.println("Mudou foco");
                 } else {
-                    if (douPiscar >= IntensidadePiscada && booSinalPiscarMudou) {
+                    if (douNivelPiscar >= IntensidadePiscada && booSinalPiscarMudou) {
                         // O comando SelecionarItem só é disparada se houver duas piscadas em menos de 1 segundo e
                         // se a piscada atual é um novo sinal do headset
-                        if (ultimoPiscar > IntensidadePiscada) {
-                            ultimoPiscar = 0;
+                        if (douUltimoNivelPiscar >= IntensidadePiscada) {
+                            douUltimoNivelPiscar = 0;
                             difSegundos = 0;
                             dtUltimoPiscar = null;
                             DispararEvento(enmTipoComando.SelecionarItem, "Selecionar item");
+                            System.out.println("Selecionou");
                         } else {
-                            if(ultimoPiscar < IntensidadePiscada){
-                                ultimoPiscar = douPiscar;
-                                dtUltimoPiscar = new Date();
-                            }
-                            DispararEvento(enmTipoComando.IdentificouPiscada, "Piscou");
+                            douUltimoNivelPiscar = douNivelPiscar;
+                            dtUltimoPiscar = new Date();
                         }
+                        // O usuário piscou na intensidade que deve ser considerada 
+                        // Dispara o evento para os observadores
+                        DispararEvento(enmTipoComando.PiscouForte, String.valueOf(douUltimoNivelPiscar));
                     }
                 }
-
             }
         }
     }
@@ -166,7 +180,22 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
         return (douNumero <= 0) ? 0 : (float) Math.log10(douNumero);
     }
 
-    private double ValidacaoAlteracaoDataMindwave(int intConexaoID, int intDado) {
-        return (ThinkGear.GetValueStatus(intConexaoID, intDado) != 0) ? ThinkGear.GetValue(intConexaoID, intDado) : 0.0;
+    private double ValidacaoAlteracaoDataMindwave(int intIDConexao, int intDado) {
+        return (ThinkGear.GetValueStatus(intIDConexao, intDado) != 0) ? ThinkGear.GetValue(intIDConexao, intDado) : 0.0;
+    }
+
+    @Override
+    public double NivelDaBateria() {
+        return ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_BATTERY);
+    }
+
+    @Override
+    public boolean ConectadoNaCabeca() {
+        return ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_POOR_SIGNAL) <= 100;
+    }
+
+    @Override
+    public boolean DispositivoConectado() {
+        return false;
     }
 }

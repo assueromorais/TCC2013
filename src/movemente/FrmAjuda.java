@@ -44,6 +44,7 @@ public class FrmAjuda extends javax.swing.JFrame implements iGeradorComandosOuvi
             }
         });
         this.setLocationRelativeTo(null);
+        util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
     }
 
     private void FecharFrame() {

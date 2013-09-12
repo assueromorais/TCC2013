@@ -7,7 +7,6 @@ package movemente;
 import Cronometro.Cronometro;
 import Cronometro.CronometroEvento;
 import Cronometro.CronometroOuvinte;
-import java.awt.event.WindowEvent;
 import java.util.Date;
 import javax.swing.JFrame;
 
@@ -15,7 +14,7 @@ import javax.swing.JFrame;
  *
  * @author ASSUERO
  */
-public class FrmTreino extends javax.swing.JFrame {
+public class FrmTreino extends javax.swing.JInternalFrame implements CronometroOuvinte {
 
     private Cronometro _crnTreinoIniciar = null;
     private Date _dtInicioFormulario = null;
@@ -51,28 +50,15 @@ public class FrmTreino extends javax.swing.JFrame {
 
         _dtInicioFormulario = new Date();
         _crnTreinoIniciar = new Cronometro(1000);
-        _crnTreinoIniciar.adicionarOuvinte(new CronometroOuvinte() {
-            @Override
-            public void IntervaloOcorreu(CronometroEvento evt) {
-                double lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
-                if (lnDif >= 15) {
-                    _crnTreinoIniciar.Parar();
-                    _crnTreinoIniciar.removerOuvinte(this);
-                    new FrmTreinoFoco().setVisible(true);
-                    FecharFrame();
-                } else {
-                    lblMensagemCronometro.setText("Em " + (int) (15 - lnDif) + " segundos o treinamento será iniciado.");
-                }
-            }
-        });
+        _crnTreinoIniciar.adicionarOuvinte(this);
         _crnTreinoIniciar.Iniciar();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
     }
 
     private void FecharFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        this.hide();
+        this.dispose();
     }
 
     /**
@@ -87,6 +73,7 @@ public class FrmTreino extends javax.swing.JFrame {
         lblMensagemTreinamento = new javax.swing.JLabel();
         lblMensagemCronometro = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnFechar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -101,6 +88,15 @@ public class FrmTreino extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("<html>O treinamento é dividido em 3(três) etapas:<br/><br/> \t<div style='padding:5px;'>1ª) Mudar o foco dos botões</div> \t<div style='padding:5px;'>2ª) Selecionar os botões</div> \t<div style='padding:5px;'>3ª) Mudar o foco e selecionar os botões</div> </html>");
 
+        btnFechar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnFechar1.setText("Iniciar treinamento");
+        btnFechar1.setMinimumSize(new java.awt.Dimension(75, 25));
+        btnFechar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFechar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,15 +104,20 @@ public class FrmTreino extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(lblMensagemCronometro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addComponent(lblMensagemCronometro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFechar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,13 +126,20 @@ public class FrmTreino extends javax.swing.JFrame {
                 .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(lblMensagemCronometro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMensagemCronometro)
+                    .addComponent(btnFechar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar1ActionPerformed
+        // TODO add your handling code here:
+        IniciarTreinamento();
+    }//GEN-LAST:event_btnFechar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,8 +176,29 @@ public class FrmTreino extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensagemCronometro;
     private javax.swing.JLabel lblMensagemTreinamento;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Inicia o treinamento, abrindo a sua primeira etapa
+     */
+    private void IniciarTreinamento() {
+        _crnTreinoIniciar.Parar();
+        _crnTreinoIniciar.removerOuvinte(this);
+        MoveMente.Container.AdicionarFrame(new FrmTreinoFoco());
+        FecharFrame();
+    }
+
+    @Override
+    public void IntervaloOcorreu(CronometroEvento evt) {
+        double lnDif = util.Data.DiferencaEmSegundos(_dtInicioFormulario, new Date());
+        if (lnDif >= 15) {
+            IniciarTreinamento();
+        } else {
+            lblMensagemCronometro.setText("Em " + (int) (15 - lnDif) + " segundos o treinamento será iniciado.");
+        }
+    }
 }

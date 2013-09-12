@@ -16,13 +16,13 @@ public class Data extends java.util.Date{
     * Retorna a diferença, em segundos, entre duas datas, a primeira deve ser menor do que a segunda para que .
     * @author ASSUERO
     */
-    public static double DiferencaEmSegundos(Date data1, Date data2){
-        long intDiferenca = 0;
+    public static float DiferencaEmSegundos(Date data1, Date data2){
+        float intDiferenca = 0;
         Calendar cldData1 = Calendar.getInstance();
         cldData1.setTime(data1);
         Calendar cldData2 = Calendar.getInstance();
         cldData2.setTime(data2);
         intDiferenca = cldData2.getTimeInMillis() - cldData1.getTimeInMillis();
-        return intDiferenca / 1000;
+        return (float) (intDiferenca / 1000);
     }
 }

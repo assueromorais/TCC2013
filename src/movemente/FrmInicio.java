@@ -8,8 +8,8 @@ import Cronometro.Cronometro;
 import Cronometro.CronometroOuvinte;
 import Cronometro.CronometroEvento;
 import iGeradorComandos.enmTipoComando;
+import java.awt.Component;
 import java.awt.KeyboardFocusManager;
-import java.awt.event.WindowEvent;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -21,7 +21,7 @@ import util.JFrameExtensaoComandos;
  *
  * @author ASSUERO
  */
-public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iGeradorComandosOuvinte, CronometroOuvinte {
+public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorComandos.iGeradorComandosOuvinte, CronometroOuvinte {
 
     /**
      * Objeto responsável por alterar o foco para o próximo item da tela.
@@ -61,7 +61,6 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
             java.util.logging.Logger.getLogger(FrmInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -92,8 +91,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         _crnTreinoIniciar = new Cronometro(1000);
         _crnTreinoIniciar.adicionarOuvinte(this);
         _crnTreinoIniciar.Iniciar();
-        // Centraliza o formulário
-        this.setLocationRelativeTo(null);
+
     }
 
     @Override
@@ -103,7 +101,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
             btnTreinar.doClick();
             _crnTreinoIniciar.Parar();
         } else {
-            lblMsgTempoTreino.setText("Em " + (int)(30 - lnDif) + " segundos o treino será aberto automaticamente.");
+            lblMsgTempoTreino.setText("Em " + (int) (30 - lnDif) + " segundos o treino será aberto automaticamente.");
         }
     }
 
@@ -119,16 +117,17 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         btnIniciar = new javax.swing.JButton();
         btnTreinar = new javax.swing.JButton();
         lblMsgTempoTreino = new javax.swing.JLabel();
-        btnFechar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 102, 0));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 0, 1));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela inicial");
-        setBackground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
+        setVisible(true);
 
         btnIniciar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnIniciar.setText("Iniciar");
         btnIniciar.setToolTipText("Abre a janela com os dispositivos.");
+        btnIniciar.setDoubleBuffered(true);
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
@@ -138,6 +137,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         btnTreinar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTreinar.setText("Treinar");
         btnTreinar.setToolTipText("Abre a área para treinamento.");
+        btnTreinar.setDoubleBuffered(true);
         btnTreinar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTreinarActionPerformed(evt);
@@ -147,33 +147,19 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         lblMsgTempoTreino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblMsgTempoTreino.setText("Em 30 segundos o treino será aberto automaticamente.");
 
-        btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(161, 161, 161)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMsgTempoTreino)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 588, Short.MAX_VALUE)
-                        .addComponent(btnFechar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMsgTempoTreino)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(99, 99, 99)
-                                .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,10 +170,10 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
                     .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(lblMsgTempoTreino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(btnFechar)
-                .addContainerGap())
+                .addContainerGap(117, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -196,7 +182,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         // TODO add your handling code here:
         this._crnTreinoIniciar.Parar();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        new FrmDispositivos().setVisible(true);
+        MoveMente.Container.AdicionarFrame(new FrmDispositivos());
         FecharFrame();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
@@ -204,21 +190,16 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
         // TODO add your handling code here:
         this._crnTreinoIniciar.Parar();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        new FrmTreino().setVisible(true);
+        MoveMente.Container.AdicionarFrame(new FrmTreino());
         FecharFrame();
     }//GEN-LAST:event_btnTreinarActionPerformed
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        // TODO add your handling code here:
-        FecharFrame();
-    }//GEN-LAST:event_btnFecharActionPerformed
-
     private void FecharFrame() {
         MoveMente.Comandos.RemoverOuvinte(this);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        this.hide();
+        this.dispose();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnTreinar;
     private javax.swing.JLabel lblMsgTempoTreino;
@@ -236,6 +217,7 @@ public class FrmInicio extends javax.swing.JFrame implements iGeradorComandos.iG
                 MudarFoco();
                 break;
             case SelecionarItem:
+                Component teste = this.getFocusOwner();
                 JFrameExtensaoComandos.SelecionarBotaoFocado(this);
                 break;
             case DesconectouCabeca:

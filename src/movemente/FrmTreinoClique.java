@@ -9,7 +9,6 @@ import Cronometro.CronometroEvento;
 import Cronometro.CronometroOuvinte;
 import iGeradorComandos.enmTipoComando;
 import iGeradorComandos.iGeradorComandosOuvinte;
-import java.awt.event.WindowEvent;
 import java.util.Date;
 import javax.swing.JFrame;
 import util.JFrameExtensaoComandos;
@@ -18,7 +17,7 @@ import util.JFrameExtensaoComandos;
  *
  * @author ASSUERO
  */
-public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComandosOuvinte, CronometroOuvinte {
+public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGeradorComandosOuvinte, CronometroOuvinte {
 
     /**
      * Cronometro responsável por abrir novamente o treino de foco. O cronômetro
@@ -45,7 +44,7 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
         _crnEtapaReiniciar.adicionarOuvinte(this);
         this.lblReiniciarTreino.setVisible(false);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
     }
 
     /**
@@ -63,10 +62,13 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
         btnClique3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblReiniciarTreino = new javax.swing.JLabel();
+        lblExplicativo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(587, 354));
+        setMinimumSize(new java.awt.Dimension(587, 354));
+        setPreferredSize(new java.awt.Dimension(587, 354));
 
         btnClique1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnClique1.setText("Clique 1");
@@ -106,47 +108,59 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
         lblReiniciarTreino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblReiniciarTreino.setText("Aguarde 25 segundos para esta etapa ser reiniciada.");
 
+        lblExplicativo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblExplicativo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblExplicativo.setText("<html>Para mudar o foco de um botão para outro, <br/>basta piscar o olho com força uma vez em um intervalo de 3 segundos.</html>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblReiniciarTreino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnProsseguir)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(btnClique1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnClique2)
-                .addGap(110, 110, 110))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(btnClique3))
+                        .addComponent(lblExplicativo, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
-                .addContainerGap(265, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnClique1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                        .addComponent(btnClique2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(61, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblReiniciarTreino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProsseguir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnClique3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(245, 245, 245))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblExplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClique1)
-                    .addComponent(btnClique2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(btnClique3)
-                .addGap(101, 101, 101)
+                    .addComponent(btnClique1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClique2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClique3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnProsseguir)
-                    .addComponent(lblReiniciarTreino))
+                    .addComponent(lblReiniciarTreino)
+                    .addComponent(btnProsseguir))
                 .addContainerGap())
         );
 
@@ -160,18 +174,20 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
      */
     private void btnProsseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsseguirActionPerformed
         // TODO add your handling code here:
-        new FrmTreinoFocoClique().setVisible(true);
+        MoveMente.Container.AdicionarFrame(new FrmTreinoFocoClique());
         FecharFrame();
     }//GEN-LAST:event_btnProsseguirActionPerformed
 
     private void btnClique1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClique1ActionPerformed
         btnClique2.setEnabled(true);
         btnClique2.requestFocus();
+        btnClique1.setFocusable(false);
     }//GEN-LAST:event_btnClique1ActionPerformed
 
     private void btnClique2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClique2ActionPerformed
         btnClique3.setEnabled(true);
         btnClique3.requestFocus();
+        btnClique2.setFocusable(false);
     }//GEN-LAST:event_btnClique2ActionPerformed
 
     private void btnClique3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClique3ActionPerformed
@@ -180,6 +196,7 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
         _crnEtapaReiniciar.Iniciar();
         _dtInicioProsseguir = new Date();
         this.lblReiniciarTreino.setVisible(true);
+        btnClique3.setFocusable(false);
     }//GEN-LAST:event_btnClique3ActionPerformed
 
     private void FecharFrame() {
@@ -187,7 +204,8 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
         _crnEtapaReiniciar.Parar();
         _crnEtapaReiniciar.removerOuvinte(this);
         MoveMente.Comandos.RemoverOuvinte(this);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        this.hide();
+        this.dispose();
     }
 
     /**
@@ -230,6 +248,7 @@ public class FrmTreinoClique extends javax.swing.JFrame implements iGeradorComan
     private javax.swing.JButton btnClique3;
     private javax.swing.JButton btnProsseguir;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblExplicativo;
     private javax.swing.JLabel lblReiniciarTreino;
     // End of variables declaration//GEN-END:variables
 

@@ -21,5 +21,14 @@ public interface iControladorDispositivos {
      * 
      */
     public boolean ControladorConectado();
-            
+    /**
+     * Fecha uma conexão atualmente aberta com o controlador de dispositivos.
+     */
+    public void Desconectar();
+    
+    /**
+     * Abre uma conexão com o controlador de dispostivos.
+     */
+    public boolean Conectar();
+    
 }

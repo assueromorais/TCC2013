@@ -6,7 +6,6 @@ package obter_mindwave;
 
 import com.neurosky.thinkgear.ThinkGear;
 import java.util.*;
-import javax.comm.CommPortIdentifier;
 
 /**
  *
@@ -17,7 +16,7 @@ public class ObterPortaMindwave {
     public static String ObterPorta() throws InterruptedException {
         boolean booAtivo = false; // Booleano que identificará se foi identificado a porta COM
         String strPortaUsada = ""; // String que conterá a porta COM de comunicação do Headset
-        ArrayList<String> mstrInversaoCOM = obterListaPortas(); // Vetor para portas COM
+        ArrayList<String> mstrInversaoCOM = util.PortaSerial.ObterListaPortasAtivas(); // Vetor para portas COM
         int intIdConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
         while (intIdConexao < 0) {
             ThinkGear.Disconnect(intIdConexao);
@@ -45,21 +44,16 @@ public class ObterPortaMindwave {
         }
     }
 
-    private static ArrayList<String> obterListaPortas() {
-        ArrayList<String> mstrInversaoCOM = new ArrayList(); // Vetor para portas COM
-        Enumeration enmPortaCOM = CommPortIdentifier.getPortIdentifiers(); // Obtém uma lista de portas COM
-        int intPortasCom = 0; // Contador do vetor
-        while (enmPortaCOM.hasMoreElements()) {
-            // Lista todas portas COM do computador para inverter a posição da listagem do último para o primeiro
-            CommPortIdentifier comPortaDetalhes = (CommPortIdentifier) enmPortaCOM.nextElement(); // Insere objetos em comPortaDetalhes
-            if (comPortaDetalhes.getPortType() == 1) { // Verifica se a porta COM é serial
-                mstrInversaoCOM.add(intPortasCom, "\\\\.\\COM" + comPortaDetalhes.getName().toString().replace("COM", "")); // Insere em um vetor o nome da porta
-                intPortasCom++; // Incrementa mais um no contador
-            }
-        }
-        return mstrInversaoCOM;
-    }
-
+    /**
+     * Realiza testes para garantir que o headset está conectado na porta
+     * especificada. Foi implementada esta função devido ao fato de o headset
+     * não ter uma função nativa para confirmar a porta onde está conectado.
+     *
+     * @param intIdConexao
+     * @param strPortaCOM
+     * @return
+     * @throws InterruptedException
+     */
     private static boolean TestarSinais(int intIdConexao, String strPortaCOM) throws InterruptedException {
         double douSinal = 0.0;
         ThinkGear.Connect(intIdConexao, strPortaCOM, ThinkGear.BAUD_57600, ThinkGear.STREAM_PACKETS); // Efetua uma conexão com o mindwave
@@ -78,6 +72,7 @@ public class ObterPortaMindwave {
             intTempoEspera = intTempoEspera / 2;
         }
         ThinkGear.Disconnect(intIdConexao); // Desconecta para próxima conexão
+        ThinkGear.FreeConnection(intIdConexao);
         return (douSinal > 0.0);
     }
 }

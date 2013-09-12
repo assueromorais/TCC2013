@@ -9,10 +9,8 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.UIManager;
-import static movemente.MoveMente.IniciarConexaoHeadset;
-import static movemente.MoveMente.MindWaveDesconectado;
 
 /**
  * Formulário exibido enquanto a aplicação é carregada, antes que o primeiro
@@ -23,7 +21,8 @@ import static movemente.MoveMente.MindWaveDesconectado;
 public class FrmSplashScreen extends javax.swing.JFrame {
 
     private OutputStream out;
-
+    public JButton btnPadrao;
+    public JButton btnBorda;
     /**
      * Creates new form FrmSplashScreen
      */
@@ -42,6 +41,10 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         this.txtPrompt.setText("Iniciando aplicativo.\n");
         // Centraliza o formulário
         this.setLocationRelativeTo(null);
+        btnFocadoInterno.setVisible(false);
+        btnPadraoInterno.setVisible(false);
+        btnBorda = btnFocadoInterno;
+        btnPadrao = btnPadraoInterno;
         out = System.out;
         System.setOut(new PrintStream(new OutputStream() {
             public void write(int b) throws IOException {
@@ -63,10 +66,24 @@ public class FrmSplashScreen extends javax.swing.JFrame {
                         }
                     ;
                 }
-        );
+            );
+                    
     }
-    }});
-}
+    }
+        @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        System.setOut((PrintStream) out);
+                    }
+                ;
+            });
+        }
+    }
+
+    );
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +99,8 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         scpPrompt = new javax.swing.JScrollPane();
         txtPrompt = new javax.swing.JTextArea();
+        btnPadraoInterno = new javax.swing.JButton();
+        btnFocadoInterno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -96,36 +115,45 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         lblMsgAguarde.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblMsgAguarde.setText("Aguarde, carregando aplicativo...");
 
-        lblIconeAguarde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Carregando.gif"))); // NOI18N
+        lblIconeAguarde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/Carregando.gif"))); // NOI18N
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Logo.png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/Logo.png"))); // NOI18N
 
         txtPrompt.setEditable(false);
         txtPrompt.setColumns(20);
         txtPrompt.setRows(5);
         scpPrompt.setViewportView(txtPrompt);
 
+        btnPadraoInterno.setText("Padraão");
+
+        btnFocadoInterno.setText("Focado");
+        btnFocadoInterno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(lblLogo)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTituloAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
+                        .addGap(159, 159, 159)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMsgAguarde, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
                                 .addComponent(lblIconeAguarde)
-                                .addGap(73, 73, 73)))))
-                .addContainerGap(124, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(73, 73, 73))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLogo)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTituloAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPadraoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFocadoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scpPrompt)
                 .addContainerGap())
@@ -139,7 +167,12 @@ public class FrmSplashScreen extends javax.swing.JFrame {
                         .addComponent(lblLogo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(lblTituloAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTituloAplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(btnPadraoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFocadoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addComponent(lblIconeAguarde)
                 .addGap(18, 18, 18)
@@ -186,6 +219,8 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFocadoInterno;
+    private javax.swing.JButton btnPadraoInterno;
     private javax.swing.JLabel lblIconeAguarde;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMsgAguarde;

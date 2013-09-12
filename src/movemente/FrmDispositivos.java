@@ -6,7 +6,6 @@ package movemente;
 
 import iGeradorComandos.iGeradorComandosOuvinte;
 import java.awt.KeyboardFocusManager;
-import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -16,7 +15,7 @@ import util.JFrameExtensaoComandos;
  *
  * @author ASSUERO
  */
-public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComandosOuvinte {
+public class FrmDispositivos extends javax.swing.JInternalFrame implements iGeradorComandosOuvinte {
 // Variáveis que mantém o estado dos dispositivos
 
     private static boolean booLampadaLigada = false;
@@ -75,13 +74,12 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
                 }
             }
         } catch (Exception e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
-
         }
         initComponents();
         // Ao receber um comando irá processá-lo
         MoveMente.Comandos.AdicionarOuvinte(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
     }
 
     /**
@@ -96,18 +94,18 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         btnLampada = new javax.swing.JButton();
         btnCampainha = new javax.swing.JButton();
         btnMotor = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
         mnbMenuSuperior = new javax.swing.JMenuBar();
         menAjuda = new javax.swing.JMenu();
         mniConteudoAjuda = new javax.swing.JMenuItem();
         mniSobre = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Controle de dispositivos");
         setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
+        setTitle("Controle de dispositivos");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(658, 452));
+        setPreferredSize(new java.awt.Dimension(658, 452));
 
         btnLampada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnLampada.setText("Lâmpada");
@@ -130,14 +128,6 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         btnMotor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMotorActionPerformed(evt);
-            }
-        });
-
-        btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
             }
         });
 
@@ -168,18 +158,14 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(btnLampada, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(btnCampainha, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(103, 103, 103)
                 .addComponent(btnMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFechar)
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,9 +175,7 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
                     .addComponent(btnLampada, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCampainha, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                .addComponent(btnFechar)
-                .addContainerGap())
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,11 +198,11 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         // TODO add your handling code here:
         booCampainhaLigada = !booCampainhaLigada;
         if (booCampainhaLigada) {
-            EnviarComando("campainha:desligar");
+            EnviarComando("S");
             System.out.println("campainha:ligar");
 
         } else {
-            EnviarComando("campainha:ligar");
+            EnviarComando("S");
             System.out.println("campainha:desligar");
         }
     }//GEN-LAST:event_btnCampainhaActionPerformed
@@ -228,20 +212,14 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
         booMotorLigado = !booMotorLigado;
         if (booMotorLigado) {
             //EnviarComando("motor:desligar");
-            EnviarComando("1");
+            EnviarComando("A");
             System.out.println("motor:desligar");
         } else {
             //EnviarComando("motor:ligar");
-            EnviarComando("1");
+            EnviarComando("P");
             System.out.println("motor:ligar");
         }
     }//GEN-LAST:event_btnMotorActionPerformed
-
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        // TODO add your handling code here:
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        FecharFrame();
-    }//GEN-LAST:event_btnFecharActionPerformed
 
     private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
         // TODO add your handling code here:
@@ -257,7 +235,8 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
 
     private void FecharFrame() {
         MoveMente.Comandos.RemoverOuvinte(this);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        this.hide();
+        this.dispose();
     }
 
     /**
@@ -275,7 +254,6 @@ public class FrmDispositivos extends javax.swing.JFrame implements iGeradorComan
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCampainha;
-    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnLampada;
     private javax.swing.JButton btnMotor;
     private javax.swing.JMenu menAjuda;
