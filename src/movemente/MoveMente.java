@@ -24,6 +24,7 @@ public class MoveMente {
 
     public static iGeradorComandos Comandos;
     public static FrmFalhaMindWave MindWaveDesconectado = null;
+    public static FrmFalhaConexaoArduino ArduinoDesconectado = null;
     private static FrmSplashScreen SplashScreen = null;
     public static iControladorDispositivos Controlador;
     public static Border bordaBotaoFocado = null;
@@ -35,46 +36,23 @@ public class MoveMente {
      */
     public static void main(String[] args) throws InterruptedException, IOException {
         ConfigurarLookUIManager();
-        SplashScreen = new FrmSplashScreen();
-        // As bordas abaixo são utilizadas como padrão para alterar o layout dos botões do formulário,
-        // permitindo que, ao receber o foco o botão receba uma borda, e ao perder o foco ele volte ao normla.
-        bordaBotaoPadrao = SplashScreen.btnPadrao.getBorder();
-        bordaBotaoFocado = SplashScreen.btnBorda.getBorder();
-        SplashScreen.setVisible(true);
-        Comandos = new ObterMindwave();
-        Controlador = new ControladorDispositivos();
-        MindWaveDesconectado = new FrmFalhaMindWave();
-        MindWaveDesconectado.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        // Enquanto o usuário clicar em Tentar novamente e estiver ocorrendo falha 
-                        // de conexão com o MindWave, o sistema irá tentar a conexão novamente
-                        if (MindWaveDesconectado.TentarNovamente == true) {
-                            MindWaveDesconectado.TentarNovamente = false;
-                            SplashScreen.setVisible(true);
-                            IniciarConexaoHeadset();
-                        } else {
-                            SplashScreen.setVisible(false);
-                            SplashScreen = null;
-                            System.exit(0);
-                        }
-                    }
-                });
-            }
-        });
-        Container = new MdiContainer();
-        IniciarConexaoArduino();
+        ConfigurarFormularios();
+        IniciarConexaoHeadset();
     }
 
     public static void IniciarConexaoHeadset() {
         if (Comandos != null) {
             if (Comandos.Conectar()) {
-                //if (true) {
+//            if (true) {
                 //Conectou ao dispositivo corretamente;
                 // Tenta a conexão com o controlador arduino
                 IniciarConexaoArduino();
+                //Conectou ao dispositivo corretamente;
+                /**
+                 * SplashScreen.setVisible(false); SplashScreen = null;
+                 * Container.AdicionarFrame(new FrmInicio());
+                 * Container.setVisible(true);*
+                 */
             } else {
                 MindWaveDesconectado.ConfigurarMensagem(enmTipoComando.MindWaveNaoEncontrado, "");
                 // Exibe a mensagem de falha na conexão com o Mind wave.
@@ -93,11 +71,9 @@ public class MoveMente {
                 Container.AdicionarFrame(new FrmInicio());
                 Container.setVisible(true);
             } else {
-                MindWaveDesconectado.setMensagem("Problema ao conectar no arduino.");
-                //MindWaveDesconectado.TentarNovamente = true;
-                MindWaveDesconectado.ConfigurarMensagem(enmTipoComando.MindWaveNaoEncontrado, "");
+                ArduinoDesconectado.ConfigurarMensagem("");
                 // Exibe a mensagem de falha na conexão com o Mind wave.
-                MindWaveDesconectado.setVisible(true);
+                ArduinoDesconectado.setVisible(true);
             }
         }
     }
@@ -110,5 +86,59 @@ public class MoveMente {
         javax.swing.UIManager.put("nimbusBase", orange);
         javax.swing.UIManager.put("nimbusBlueGrey", orange);
         javax.swing.UIManager.put("control", new java.awt.Color(255, 247, 235));
+    }
+
+    private static void ConfigurarFormularios() {
+        SplashScreen = new FrmSplashScreen();
+        // As bordas abaixo são utilizadas como padrão para alterar o layout dos botões do formulário,
+        // permitindo que, ao receber o foco o botão receba uma borda, e ao perder o foco ele volte ao normla.
+        bordaBotaoPadrao = SplashScreen.btnPadrao.getBorder();
+        bordaBotaoFocado = SplashScreen.btnBorda.getBorder();
+        SplashScreen.setVisible(true);
+        Comandos = new ObterMindwave();
+        Controlador = new ControladorDispositivos();
+        MindWaveDesconectado = new FrmFalhaMindWave();
+        ArduinoDesconectado = new FrmFalhaConexaoArduino();
+        ArduinoDesconectado.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        // Enquanto o usuário clicar em Tentar novamente e estiver ocorrendo falha 
+                        // de conexão com o Arduino, o sistema irá tentar a conexão novamente
+                        if (ArduinoDesconectado.TentarNovamente == true) {
+                            ArduinoDesconectado.TentarNovamente = false;
+                            SplashScreen.setVisible(true);
+                            IniciarConexaoArduino();
+                        } else {
+                            SplashScreen.setVisible(false);
+                            SplashScreen = null;
+                            System.exit(0);
+                        }
+                    }
+                });
+            }
+        });
+        MindWaveDesconectado.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        // Enquanto o usuário clicar em Tentar novamente e estiver ocorrendo falha 
+                        // de conexão com o Headset, o sistema irá tentar a conexão novamente
+                        if (MindWaveDesconectado.TentarNovamente == true) {
+                            MindWaveDesconectado.TentarNovamente = false;
+                            SplashScreen.setVisible(true);
+                            IniciarConexaoHeadset();
+                        } else {
+                            SplashScreen.setVisible(false);
+                            SplashScreen = null;
+                            System.exit(0);
+                        }
+                    }
+                });
+            }
+        });
+        Container = new MdiContainer();
     }
 }

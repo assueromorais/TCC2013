@@ -17,5 +17,6 @@ public enum enmTipoComando
     PortaDesconectada,
     MindWaveNaoEncontrado,
     Piscou,
-    PiscouForte;
+    PiscouForte,
+    SinalPobre;
 }

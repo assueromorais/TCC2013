@@ -52,4 +52,10 @@ public interface iGeradorComandos {
      */
     public void RemoverOuvinte(iGeradorComandosOuvinte ouvinte);
 
+    /**
+     * Retorna o intervalo 
+     * @return 
+     */
+    public double getIntervaloFocar();
+    
 }

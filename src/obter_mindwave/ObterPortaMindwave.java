@@ -18,13 +18,9 @@ public class ObterPortaMindwave {
         String strPortaUsada = ""; // String que conterá a porta COM de comunicação do Headset
         ArrayList<String> mstrInversaoCOM = util.PortaSerial.ObterListaPortasAtivas(); // Vetor para portas COM
         int intIdConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
-        while (intIdConexao < 0) {
-            ThinkGear.Disconnect(intIdConexao);
-            ThinkGear.FreeConnection(intIdConexao);
-            intIdConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
-        }
         System.out.println("Procurando Headset...");
         System.out.println(mstrInversaoCOM.size() + " porta(s) encontrada(s).");
+
         for (int intIndicePorcaCom = mstrInversaoCOM.size() - 1; intIndicePorcaCom >= 0; intIndicePorcaCom--) {
             System.out.println("Testando porta " + mstrInversaoCOM.get(intIndicePorcaCom).toString() + ".");
             // Informa que foi encontrada porta
@@ -33,8 +29,8 @@ public class ObterPortaMindwave {
                 strPortaUsada = mstrInversaoCOM.get(intIndicePorcaCom); // Informa a porta que está ativa
                 break; // Sai do loop
             }
+            intIdConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
         }
-        ThinkGear.FreeConnection(intIdConexao); // Limpa espaço de conexão
         if (booAtivo) { // Se existe porta disponível
             System.out.println("Headset encontrado na porta " + strPortaUsada + ".");
             return strPortaUsada; // Nome da porta
@@ -71,8 +67,8 @@ public class ObterPortaMindwave {
             }
             intTempoEspera = intTempoEspera / 2;
         }
-        ThinkGear.Disconnect(intIdConexao); // Desconecta para próxima conexão
-        ThinkGear.FreeConnection(intIdConexao);
+        ThinkGear.Disconnect(intIdConexao);
+        ThinkGear.FreeConnection(intIdConexao); // Limpa espaço de conexão
         return (douSinal > 0.0);
     }
 }

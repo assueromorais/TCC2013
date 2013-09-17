@@ -145,6 +145,11 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
                         DispararEvento(enmTipoComando.PiscouForte, String.valueOf(douUltimoNivelPiscar));
                     }
                 }
+                if (ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_POOR_SIGNAL) > 150) {
+                    // O sinal está fraco, isto pode indicar que o headset está mau posicionado ou está foca da cabeça
+                    DispararEvento(enmTipoComando.SinalPobre, String.valueOf(ThinkGear.GetValue(intIDConexao, ThinkGear.DATA_POOR_SIGNAL)));
+                    System.out.println("Sinal probre.");
+                }
             }
         }
     }
@@ -198,4 +203,11 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
     public boolean DispositivoConectado() {
         return false;
     }
+
+    @Override
+    public double getIntervaloFocar() {
+        return IntervaloPiscadasSelecionarItem;
+    }
+;
+    
 }

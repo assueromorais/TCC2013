@@ -29,7 +29,7 @@ public class ObterPortaArduino {
         ArrayList<String> portas = util.PortaSerial.ObterListaPortasAtivas();
         for (int i = 0; i < portas.size(); i++) {
             if (TestarPorta(portas.get(i))) {
-                return portas.get(i);
+                return portas.get(i).replace("\\\\.\\", "");
             }
         }
         return "";
@@ -41,7 +41,7 @@ public class ObterPortaArduino {
         InputStream input = null;
         OutputStream output = null;
         try {
-            portIdentifier = CommPortIdentifier.getPortIdentifier("COM7");
+            portIdentifier = CommPortIdentifier.getPortIdentifier(strPortaCom.replace("\\\\.\\", ""));
         } catch (NoSuchPortException ex) {
             return false;
         }
@@ -56,7 +56,7 @@ public class ObterPortaArduino {
                     serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
                     input = serialPort.getInputStream();
                     output = serialPort.getOutputStream();
-                    return true;
+
                 } else {
                     System.out.println("Erro: Somente portas seriais podem ser utilizadas para esta conexão.");
                 }
@@ -83,12 +83,16 @@ public class ObterPortaArduino {
                 Date dataInicio = calendar.getTime();
                 do {
                     output.write("0".getBytes());
+                    output.flush();
                     output.close();
                     resposta = util.PortaSerial.LerPortaSerial(input);
-                    if ((resposta != null && !resposta.equals(""))) {
+                    if ((resposta != null && !resposta.equals("") && resposta.contains("1"))) {
                         // O dispositivo respondeu ao comando
                         System.out.println("Resposta: " + resposta);
                         System.out.println("Encontrado na porta " + strPortaCom);
+                        if (serialPort != null) {
+                            serialPort.close();
+                        }
                         return true;
                     };
                 } while (util.Data.DiferencaEmSegundos(new Date(), dataInicio) > 0);

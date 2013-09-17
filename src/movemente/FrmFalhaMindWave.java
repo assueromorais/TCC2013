@@ -76,15 +76,19 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         btnTentarNovamente = new javax.swing.JButton();
         lblMensagem = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Falha na conexão");
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        setMinimumSize(new java.awt.Dimension(696, 390));
         setResizable(false);
 
         btnEncerrarAplicativo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEncerrarAplicativo.setText("Encerrar aplicativo");
+        btnEncerrarAplicativo.setMinimumSize(new java.awt.Dimension(151, 34));
+        btnEncerrarAplicativo.setPreferredSize(new java.awt.Dimension(151, 34));
         btnEncerrarAplicativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncerrarAplicativoActionPerformed(evt);
@@ -93,47 +97,57 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
 
         btnTentarNovamente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTentarNovamente.setText("Tentar novamente");
+        btnTentarNovamente.setMinimumSize(new java.awt.Dimension(149, 34));
+        btnTentarNovamente.setPreferredSize(new java.awt.Dimension(149, 34));
         btnTentarNovamente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTentarNovamenteActionPerformed(evt);
             }
         });
 
-        lblMensagem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblMensagem.setText("<html>Verifique se o token USB está conectado ao computador e se o headset está ligado.<html/>");
+        lblMensagem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblMensagem.setText("<html>Verifique se o token USB está conectado ao computador<br/> e se o headset está ligado.<html/>");
 
-        lblTitulo.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         lblTitulo.setText("Não foi possível conectar ao headset!");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/mindwave_desl.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTentarNovamente)
-                .addGap(40, 40, 40)
-                .addComponent(btnEncerrarAplicativo)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitulo))
+                .addGap(48, 48, 48)
+                .addComponent(lblTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(30, 30, 30)
                 .addComponent(lblTitulo)
-                .addGap(43, 43, 43)
-                .addComponent(lblMensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addGap(142, 142, 142)
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEncerrarAplicativo)
-                    .addComponent(btnTentarNovamente))
-                .addContainerGap())
+                    .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -198,6 +212,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEncerrarAplicativo;
     private javax.swing.JButton btnTentarNovamente;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
