@@ -54,13 +54,14 @@ public final class ControladorDispositivos implements iControladorDispositivos {
      */
     @Override
     public boolean Conectar() {
-        PortaCom = ObterPortaArduino.ObterPorta();
+        PortaCom = "COM7";//ObterPortaArduino.ObterPorta();
         if (!PortaCom.equals("")) {
             CommPortIdentifier portIdentifier = null;
             try {
                 portIdentifier = CommPortIdentifier.getPortIdentifier(PortaCom);
             } catch (NoSuchPortException ex) {
                 Logger.getLogger(ControladorDispositivos.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
             }
             if (portIdentifier.isCurrentlyOwned()) {
                 System.out.println("Erro: A porta está atualmente em uso.");
