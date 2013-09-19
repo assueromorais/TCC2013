@@ -68,6 +68,10 @@ public class MdiContainer extends javax.swing.JFrame implements iGeradorComandos
         btnFechar = new javax.swing.JButton();
         pgbNivelPiscada = new javax.swing.JProgressBar();
         lblIntensidadePiscada = new javax.swing.JLabel();
+        mnbMenuSuperior = new javax.swing.JMenuBar();
+        menAjuda = new javax.swing.JMenu();
+        mniConteudoAjuda = new javax.swing.JMenuItem();
+        mniSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(658, 571));
@@ -78,13 +82,14 @@ public class MdiContainer extends javax.swing.JFrame implements iGeradorComandos
         desktopPane.setMinimumSize(new java.awt.Dimension(658, 452));
         desktopPane.setName(""); // NOI18N
 
-        lblNivelUltimaPiscada.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblNivelUltimaPiscada.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblNivelUltimaPiscada.setText("Nível da piscada:");
 
-        lblMensagemErro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMensagemErro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblMensagemErro.setForeground(new java.awt.Color(255, 0, 0));
         lblMensagemErro.setText("Falha no MindWave");
 
-        btnFechar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnFechar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,42 +101,68 @@ public class MdiContainer extends javax.swing.JFrame implements iGeradorComandos
         pgbNivelPiscada.setToolTipText("");
         pgbNivelPiscada.setValue(110);
 
-        lblIntensidadePiscada.setText("<html><body>&Aut;</body></html>");
+        lblIntensidadePiscada.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblIntensidadePiscada.setText("<html><body>&Darr;</body></html>");
+
+        menAjuda.setText("Ajuda");
+        menAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        mniConteudoAjuda.setText("Conteúdo da ajuda");
+        mniConteudoAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniConteudoAjudaActionPerformed(evt);
+            }
+        });
+        menAjuda.add(mniConteudoAjuda);
+
+        mniSobre.setText("Sobre");
+        mniSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSobreActionPerformed(evt);
+            }
+        });
+        menAjuda.add(mniSobre);
+
+        mnbMenuSuperior.add(menAjuda);
+
+        setJMenuBar(mnbMenuSuperior);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pgbNivelPiscada, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMensagemErro)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNivelUltimaPiscada)
-                        .addGap(105, 105, 105)
-                        .addComponent(lblIntensidadePiscada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMensagemErro)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblNivelUltimaPiscada)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblIntensidadePiscada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pgbNivelPiscada, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMensagemErro)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNivelUltimaPiscada)
+                    .addComponent(lblIntensidadePiscada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMensagemErro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNivelUltimaPiscada)
-                        .addGap(5, 5, 5)
-                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIntensidadePiscada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pgbNivelPiscada, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pgbNivelPiscada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFechar))
                 .addGap(17, 17, 17))
         );
 
@@ -145,6 +176,16 @@ public class MdiContainer extends javax.swing.JFrame implements iGeradorComandos
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         System.exit(1);
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void mniConteudoAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConteudoAjudaActionPerformed
+        // TODO add your handling code here:
+        new FrmAjuda().setVisible(true);
+    }//GEN-LAST:event_mniConteudoAjudaActionPerformed
+
+    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
+        // TODO add your handling code here:
+        new FrmSobre().setVisible(true);
+    }//GEN-LAST:event_mniSobreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +227,10 @@ public class MdiContainer extends javax.swing.JFrame implements iGeradorComandos
     private javax.swing.JLabel lblIntensidadePiscada;
     private javax.swing.JLabel lblMensagemErro;
     private javax.swing.JLabel lblNivelUltimaPiscada;
+    private javax.swing.JMenu menAjuda;
+    private javax.swing.JMenuBar mnbMenuSuperior;
+    private javax.swing.JMenuItem mniConteudoAjuda;
+    private javax.swing.JMenuItem mniSobre;
     private javax.swing.JProgressBar pgbNivelPiscada;
     // End of variables declaration//GEN-END:variables
 

@@ -125,10 +125,10 @@ public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorCom
         setTitle("Tela inicial");
         setVisible(true);
 
-        lblMsgTempoTreino.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMsgTempoTreino.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         lblMsgTempoTreino.setText("Em 30 segundos o treino será aberto automaticamente.");
 
-        btnIniciar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnIniciar.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         btnIniciar.setText("Iniciar");
         btnIniciar.setToolTipText("Abre a janela com os dispositivos.");
         btnIniciar.setDoubleBuffered(true);
@@ -138,7 +138,7 @@ public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorCom
             }
         });
 
-        btnTreinar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTreinar.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         btnTreinar.setText("Treinar");
         btnTreinar.setToolTipText("Abre a área para treinamento.");
         btnTreinar.setDoubleBuffered(true);
@@ -154,9 +154,9 @@ public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorCom
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -164,8 +164,8 @@ public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorCom
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTreinar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -174,9 +174,9 @@ public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorCom
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblMsgTempoTreino)
@@ -185,7 +185,7 @@ public class FrmInicio extends javax.swing.JInternalFrame implements iGeradorCom
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(146, 146, 146)
                 .addComponent(lblMsgTempoTreino)

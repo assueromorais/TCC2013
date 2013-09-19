@@ -4,7 +4,6 @@
  */
 package movemente;
 
-import iGeradorComandos.enmTipoComando;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -39,7 +38,6 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
         } catch (Exception e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
 
         }
-        this.setSize(600, 400);
         // Centraliza o formulário
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -50,7 +48,6 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
      *
      */
     public void ConfigurarMensagem(String strMensagem) {
-        
     }
 
     /**
@@ -72,10 +69,11 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
         setTitle("Falha na conexão");
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        setMinimumSize(new java.awt.Dimension(696, 390));
+        setMinimumSize(null);
+        setPreferredSize(null);
         setResizable(false);
 
-        btnEncerrarAplicativo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEncerrarAplicativo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnEncerrarAplicativo.setText("Encerrar aplicativo");
         btnEncerrarAplicativo.setMinimumSize(new java.awt.Dimension(151, 34));
         btnEncerrarAplicativo.setPreferredSize(new java.awt.Dimension(151, 34));
@@ -85,7 +83,7 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
             }
         });
 
-        btnTentarNovamente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTentarNovamente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnTentarNovamente.setText("Tentar novamente");
         btnTentarNovamente.setMinimumSize(new java.awt.Dimension(149, 34));
         btnTentarNovamente.setPreferredSize(new java.awt.Dimension(149, 34));
@@ -95,10 +93,10 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
             }
         });
 
-        lblMensagem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblMensagem.setText("Problema ao conectar ao controlador de dispositivos.");
+        lblMensagem.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblMensagem.setText("<html><body>Problema ao conectar <br/>ao controlador de dispositivos.</body></html>");
 
-        lblTitulo.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         lblTitulo.setText("Não foi possível conectar aos dispositivos!");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/arduino_desl.png"))); // NOI18N
@@ -107,27 +105,28 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(lblMensagem)
-                .addGap(0, 117, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitulo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 21, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(41, 41, 41)
                 .addComponent(lblTitulo)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -136,11 +135,11 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                    .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -160,9 +159,10 @@ public class FrmFalhaConexaoArduino extends javax.swing.JFrame {
         FecharFrame();
     }//GEN-LAST:event_btnTentarNovamenteActionPerformed
 
-    public void setMensagem(String strMensagem ){
+    public void setMensagem(String strMensagem) {
         this.lblMensagem.setText(strMensagem);
     }
+
     private void FecharFrame() {
         this.setVisible(false);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

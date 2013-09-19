@@ -31,20 +31,20 @@
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="lblMensagemCronometro" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnFechar1" min="-2" pref="159" max="-2" attributes="0"/>
+                      <Component id="btnFechar1" min="-2" pref="349" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="lblMensagemTreinamento" min="-2" pref="502" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="lblMensagemTreinamento" min="-2" pref="1100" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -58,12 +58,14 @@
               <Component id="lblMensagemTreinamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblMensagemCronometro" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnFechar1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace pref="82" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblMensagemCronometro" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnFechar1" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,7 +74,7 @@
     <Component class="javax.swing.JLabel" name="lblMensagemTreinamento">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="24" style="2"/>
+          <Font name="Arial" size="36" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Nesta &#xe1;rea voc&#xea; ir&#xe1; realizar um treinamento &lt;br/&gt;para aprender a utilizar o aplicativo.&lt;/html&gt;"/>
       </Properties>
@@ -80,7 +82,7 @@
     <Component class="javax.swing.JLabel" name="lblMensagemCronometro">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="0"/>
+          <Font name="Arial" size="36" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Em 15 segundos o treinamento ser&#xe1; iniciado."/>
       </Properties>
@@ -88,7 +90,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="0"/>
+          <Font name="Arial" size="36" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;O treinamento &#xe9; dividido em 3(tr&#xea;s) etapas:&lt;br/&gt;&lt;br/&gt; &#x9;&lt;div style=&apos;padding:5px;&apos;&gt;1&#xaa;) Mudar o foco dos bot&#xf5;es&lt;/div&gt; &#x9;&lt;div style=&apos;padding:5px;&apos;&gt;2&#xaa;) Selecionar os bot&#xf5;es&lt;/div&gt; &#x9;&lt;div style=&apos;padding:5px;&apos;&gt;3&#xaa;) Mudar o foco e selecionar os bot&#xf5;es&lt;/div&gt; &lt;/html&gt;"/>
       </Properties>
@@ -96,7 +98,7 @@
     <Component class="javax.swing.JButton" name="btnFechar1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="0"/>
+          <Font name="Arial" size="36" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Iniciar treinamento"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

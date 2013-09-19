@@ -85,7 +85,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(696, 390));
         setResizable(false);
 
-        btnEncerrarAplicativo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEncerrarAplicativo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnEncerrarAplicativo.setText("Encerrar aplicativo");
         btnEncerrarAplicativo.setMinimumSize(new java.awt.Dimension(151, 34));
         btnEncerrarAplicativo.setPreferredSize(new java.awt.Dimension(151, 34));
@@ -95,7 +95,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
             }
         });
 
-        btnTentarNovamente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTentarNovamente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnTentarNovamente.setText("Tentar novamente");
         btnTentarNovamente.setMinimumSize(new java.awt.Dimension(149, 34));
         btnTentarNovamente.setPreferredSize(new java.awt.Dimension(149, 34));
@@ -105,10 +105,10 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
             }
         });
 
-        lblMensagem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblMensagem.setText("<html>Verifique se o token USB está conectado ao computador<br/> e se o headset está ligado.<html/>");
+        lblMensagem.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblMensagem.setText("<html>Verifique se o token USB <br/>está conectado ao computador <br/>e se o headset está ligado.<html/>");
 
-        lblTitulo.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         lblTitulo.setText("Não foi possível conectar ao headset!");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/mindwave_desl.png"))); // NOI18N
@@ -117,37 +117,40 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(lblTitulo)))
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(41, 41, 41)
                 .addComponent(lblTitulo)
-                .addGap(48, 48, 48)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                    .addComponent(btnEncerrarAplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();

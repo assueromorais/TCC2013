@@ -78,16 +78,16 @@ public class FrmTreino extends javax.swing.JInternalFrame implements CronometroO
         setBackground(new java.awt.Color(255, 255, 255));
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblMensagemTreinamento.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
+        lblMensagemTreinamento.setFont(new java.awt.Font("Arial", 2, 36)); // NOI18N
         lblMensagemTreinamento.setText("<html>Nesta área você irá realizar um treinamento <br/>para aprender a utilizar o aplicativo.</html>");
 
-        lblMensagemCronometro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMensagemCronometro.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         lblMensagemCronometro.setText("Em 15 segundos o treinamento será iniciado.");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel1.setText("<html>O treinamento é dividido em 3(três) etapas:<br/><br/> \t<div style='padding:5px;'>1ª) Mudar o foco dos botões</div> \t<div style='padding:5px;'>2ª) Selecionar os botões</div> \t<div style='padding:5px;'>3ª) Mudar o foco e selecionar os botões</div> </html>");
 
-        btnFechar1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnFechar1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         btnFechar1.setText("Iniciar treinamento");
         btnFechar1.setMinimumSize(new java.awt.Dimension(75, 25));
         btnFechar1.addActionListener(new java.awt.event.ActionListener() {
@@ -106,16 +106,16 @@ public class FrmTreino extends javax.swing.JInternalFrame implements CronometroO
                         .addGap(19, 19, 19)
                         .addComponent(lblMensagemCronometro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFechar1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnFechar1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(71, 71, 71)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 24, Short.MAX_VALUE)))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 50, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -125,11 +125,12 @@ public class FrmTreino extends javax.swing.JInternalFrame implements CronometroO
                 .addComponent(lblMensagemTreinamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMensagemCronometro)
-                    .addComponent(btnFechar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblMensagemCronometro)
+                        .addContainerGap())
+                    .addComponent(btnFechar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();

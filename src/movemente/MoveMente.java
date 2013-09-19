@@ -42,8 +42,8 @@ public class MoveMente {
 
     public static void IniciarConexaoHeadset() {
         if (Comandos != null) {
-            if (Comandos.Conectar()) {
-//            if (true) {
+          //  if (Comandos.Conectar()) {
+            if (true) {
                 //Conectou ao dispositivo corretamente;
                 // Tenta a conexão com o controlador arduino
                 IniciarConexaoArduino();
@@ -63,8 +63,8 @@ public class MoveMente {
 
     public static void IniciarConexaoArduino() {
         if (Controlador != null) {
-            if (Controlador.Conectar()) {
-                //if (true) {
+            //if (Controlador.Conectar()) {
+                if (true) {
                 //Conectou ao dispositivo corretamente;
                 SplashScreen.setVisible(false);
                 SplashScreen = null;
@@ -82,10 +82,10 @@ public class MoveMente {
      * Configura a interface do usuário.
      */
     private static void ConfigurarLookUIManager() {
-        Color orange = new java.awt.Color(255, 225, 195);
-        javax.swing.UIManager.put("nimbusBase", orange);
-        javax.swing.UIManager.put("nimbusBlueGrey", orange);
-        javax.swing.UIManager.put("control", new java.awt.Color(255, 247, 235));
+        Color botoes = new java.awt.Color(188, 188, 188);
+        javax.swing.UIManager.put("nimbusBase", botoes);
+        javax.swing.UIManager.put("nimbusBlueGrey", botoes);
+        javax.swing.UIManager.put("control",  java.awt.Color.white);//new java.awt.Color(240,245,255));//new java.awt.Color(255, 247, 235));
     }
 
     private static void ConfigurarFormularios() {

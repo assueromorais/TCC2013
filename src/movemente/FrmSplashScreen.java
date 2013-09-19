@@ -112,7 +112,7 @@ public class FrmSplashScreen extends javax.swing.JFrame {
         lblTituloAplicacao.setFont(new java.awt.Font("Arial", 3, 48)); // NOI18N
         lblTituloAplicacao.setText("<html><body><u>MoveMente</u> 0.1</body></html>");
 
-        lblMsgAguarde.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblMsgAguarde.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblMsgAguarde.setText("Aguarde, carregando aplicativo...");
 
         lblIconeAguarde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/Carregando.gif"))); // NOI18N
@@ -137,13 +137,9 @@ public class FrmSplashScreen extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMsgAguarde, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(lblIconeAguarde)
-                                .addGap(73, 73, 73))))
+                        .addGap(232, 232, 232)
+                        .addComponent(lblIconeAguarde)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLogo)
                         .addGap(18, 18, 18)
@@ -151,12 +147,16 @@ public class FrmSplashScreen extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnPadraoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFocadoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                            .addComponent(btnFocadoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scpPrompt)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMsgAguarde)
+                .addGap(118, 118, 118))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

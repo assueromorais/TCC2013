@@ -39,24 +39,20 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="lblExplicativo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="lblReiniciarTreino" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnProsseguir" min="-2" pref="109" max="-2" attributes="0"/>
+                              <Component id="btnProsseguir" min="-2" pref="162" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -72,12 +68,12 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblExplicativo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" pref="127" max="-2" attributes="0"/>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblReiniciarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnProsseguir" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="btnProsseguir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
@@ -88,7 +84,7 @@
     <Component class="javax.swing.JButton" name="btnProsseguir">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="0"/>
+          <Font name="Arial" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Prosseguir"/>
       </Properties>
@@ -99,7 +95,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="24" style="3"/>
+          <Font name="Arial" size="36" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="ETAPA 2 - TREINANDO O CLIQUE"/>
       </Properties>
@@ -107,7 +103,7 @@
     <Component class="javax.swing.JLabel" name="lblReiniciarTreino">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="12" style="0"/>
+          <Font name="Arial" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Aguarde 25 segundos para esta etapa ser reiniciada."/>
       </Properties>
@@ -115,7 +111,7 @@
     <Component class="javax.swing.JLabel" name="lblExplicativo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="18" style="0"/>
+          <Font name="Arial" size="36" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Para mudar o foco de um bot&#xe3;o para outro, &lt;br/&gt;basta piscar o olho com for&#xe7;a uma vez em um intervalo de 3 segundos.&lt;/html&gt;"/>
@@ -157,11 +153,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnClique2" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="btnClique1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="btnClique2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnClique1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="btnClique3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="btnClique3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -171,7 +167,7 @@
         <Component class="javax.swing.JButton" name="btnClique1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="0"/>
+              <Font name="Arial" size="24" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Clique 1"/>
           </Properties>
@@ -182,7 +178,7 @@
         <Component class="javax.swing.JButton" name="btnClique2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="0"/>
+              <Font name="Arial" size="24" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Clique 2"/>
           </Properties>
@@ -193,7 +189,7 @@
         <Component class="javax.swing.JButton" name="btnClique3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="0"/>
+              <Font name="Arial" size="24" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Clique 3"/>
           </Properties>

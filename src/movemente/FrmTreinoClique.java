@@ -71,7 +71,7 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
         setMinimumSize(new java.awt.Dimension(587, 354));
         setPreferredSize(new java.awt.Dimension(587, 354));
 
-        btnProsseguir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProsseguir.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnProsseguir.setText("Prosseguir");
         btnProsseguir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,13 +79,13 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         jLabel2.setText("ETAPA 2 - TREINANDO O CLIQUE");
 
-        lblReiniciarTreino.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblReiniciarTreino.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblReiniciarTreino.setText("Aguarde 25 segundos para esta etapa ser reiniciada.");
 
-        lblExplicativo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblExplicativo.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         lblExplicativo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblExplicativo.setText("<html>Para mudar o foco de um botão para outro, <br/>basta piscar o olho com força uma vez em um intervalo de 3 segundos.</html>");
 
@@ -94,7 +94,7 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(556, 135));
 
-        btnClique1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnClique1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnClique1.setText("Clique 1");
         btnClique1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +102,7 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
             }
         });
 
-        btnClique2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnClique2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnClique2.setText("Clique 2");
         btnClique2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
             }
         });
 
-        btnClique3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnClique3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnClique3.setText("Clique 3");
         btnClique3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,10 +138,10 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClique2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClique1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(btnClique3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClique2)
+                    .addComponent(btnClique1))
+                .addGap(33, 33, 33)
+                .addComponent(btnClique3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -153,19 +153,16 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(lblExplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 97, Short.MAX_VALUE))
+                        .addComponent(lblExplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblReiniciarTreino)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnProsseguir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(btnProsseguir, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,12 +175,12 @@ public class FrmTreinoClique extends javax.swing.JInternalFrame implements iGera
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblExplicativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblReiniciarTreino)
-                    .addComponent(btnProsseguir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnProsseguir))
                 .addGap(10, 10, 10))
         );
 

@@ -45,7 +45,7 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
      * SelecionarItem será disparado. Caso o intervalo seja ultrapassado, o
      * comando MudarFoco será disparado.
      */
-    private double IntervaloPiscadasSelecionarItem = 1;
+    private double IntervaloPiscadasSelecionarItem = 1.4;
     /**
      * ID da conexão atual com o Headset.
      */
