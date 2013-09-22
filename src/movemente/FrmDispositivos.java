@@ -477,32 +477,32 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
 
     private void btnFomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFomeActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.Fome();
     }//GEN-LAST:event_btnFomeActionPerformed
 
     private void btnSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.Sim();
     }//GEN-LAST:event_btnSimActionPerformed
 
     private void btnDorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDorActionPerformed
         // TODO add your handling code here
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.SentindoDor();
     }//GEN-LAST:event_btnDorActionPerformed
 
     private void btnSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSedeActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.Sede();
     }//GEN-LAST:event_btnSedeActionPerformed
 
     private void btnNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNaoActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.Nao();
     }//GEN-LAST:event_btnNaoActionPerformed
 
     private void btnBanheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanheiroActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.Banheiro();
     }//GEN-LAST:event_btnBanheiroActionPerformed
 
     private void FecharFrame() {

@@ -7,7 +7,7 @@ package controladorFala;
 import javazoom.jl.player.advanced.*;
 
 /**
- *
+ * Classe que disponibiliza as opções de fala.
  * @author ASSUERO
  */
 public class ControladorFala {
@@ -17,17 +17,22 @@ public class ControladorFala {
         soundToPlay.play();
     }
 
-    public static void Ola() {
-        SoundJLayer soundToPlay = new SoundJLayer("ola.mp3");
+    public static void Banheiro() {
+        SoundJLayer soundToPlay = new SoundJLayer("banheiro.mp3");
         soundToPlay.play();
     }
 
-    public static void Despedir() {
-        SoundJLayer soundToPlay = new SoundJLayer("atemais.mp3");
+    public static void Fome() {
+        SoundJLayer soundToPlay = new SoundJLayer("fome.mp3");
         soundToPlay.play();
 
     }
 
+    public static void Sede() {
+        SoundJLayer soundToPlay = new SoundJLayer("sede.mp3");
+        soundToPlay.play();
+
+    }
     public static void Sim() {
         SoundJLayer soundToPlay = new SoundJLayer("sim.mp3");
         soundToPlay.play();
