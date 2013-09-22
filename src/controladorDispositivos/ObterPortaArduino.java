@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Busca pela porta serial onde está conectado o Arduino.
  * @author ASSUERO
  */
 public class ObterPortaArduino {
