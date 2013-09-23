@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -36,7 +37,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (Exception e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {/* If Nimbus is not available, you can set the GUI to another look and feel.*/
 
         }
         this.setSize(600, 400);
@@ -44,23 +45,6 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         util.JFrameExtensaoComandos.ConfigurarBordaBotoes(this);
-    }
-
-    /**
-     *
-     */
-    public void ConfigurarMensagem(enmTipoComando Comando, String strMensagem) {
-        switch (Comando) {
-            case BateriaCritica:
-
-                break;
-            case DesconectouCabeca:
-
-                break;
-            case PortaDesconectada:
-
-                break;
-        }
     }
 
     /**
@@ -173,6 +157,7 @@ public class FrmFalhaMindWave extends javax.swing.JFrame {
     public void setMensagem(String strMensagem ){
         this.lblMensagem.setText(strMensagem);
     }
+    
     private void FecharFrame() {
         this.setVisible(false);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

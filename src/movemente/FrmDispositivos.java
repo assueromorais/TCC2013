@@ -482,7 +482,7 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
 
     private void btnSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.Sim();
+        controladorFala.ControladorFala.EmitirSom();
     }//GEN-LAST:event_btnSimActionPerformed
 
     private void btnDorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDorActionPerformed

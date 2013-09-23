@@ -5,7 +5,6 @@
 package movemente;
 
 import controladorDispositivos.ControladorDispositivos;
-import iGeradorComandos.enmTipoComando;
 
 import iGeradorComandos.iGeradorComandos;
 import iControladorDispositivos.iControladorDispositivos;
@@ -22,13 +21,44 @@ import obter_mindwave.ObterMindwave;
  */
 public class MoveMente {
 
+    /**
+     * Objeto responsável por gerar os na tela.
+     */
     public static iGeradorComandos Comandos;
+    
+    /**
+     * Formulário responsável por exibir uma mensagem de falha na conexão com o MindWave.
+     */
     public static FrmFalhaMindWave MindWaveDesconectado = null;
+    
+    /**
+     * Formulário responsável por exibir uma mensagem de falha na conexão com o Arduino.
+     */
     public static FrmFalhaConexaoArduino ArduinoDesconectado = null;
+    
+    /**
+     * Formulário exibido no início da execução do aplicativo enquanto está tentando se conectar aos controladores.
+     */
     private static FrmSplashScreen SplashScreen = null;
+    
+    /**
+     * Objeto responsável por controlar os dispostivos externos.
+     */
     public static iControladorDispositivos Controlador;
+    
+    /**
+     * Borda utilizada quando um botão é focado.
+     */
     public static Border bordaBotaoFocado = null;
+    
+    /**
+     * Borda utilizada quando um botão perde o foco.
+     */
     public static Border bordaBotaoPadrao = null;
+    
+    /**
+     * Formulário principal o qual irá "Conter" os demais formulários do aplicativo, exceto as telas de falha.
+     */
     public static MdiContainer Container = null;
 
     /**
@@ -40,9 +70,12 @@ public class MoveMente {
         IniciarConexaoHeadset();
     }
 
+    /**
+     * Tenta se conectar ao headset.
+     */
     public static void IniciarConexaoHeadset() {
         if (Comandos != null) {
-          //  if (Comandos.Conectar()) {
+            //  if (Comandos.Conectar()) {
             if (true) {
                 //Conectou ao dispositivo corretamente;
                 // Tenta a conexão com o controlador arduino
@@ -54,17 +87,20 @@ public class MoveMente {
                  * Container.setVisible(true);*
                  */
             } else {
-                MindWaveDesconectado.ConfigurarMensagem(enmTipoComando.MindWaveNaoEncontrado, "");
+                // MindWaveDesconectado.ConfigurarMensagem(enmTipoComando.MindWaveNaoEncontrado, "");
                 // Exibe a mensagem de falha na conexão com o Mind wave.
                 MindWaveDesconectado.setVisible(true);
             }
         }
     }
 
+    /**
+     * Tenta se conectar ao controlador arduino.
+     */
     public static void IniciarConexaoArduino() {
         if (Controlador != null) {
             //if (Controlador.Conectar()) {
-                if (true) {
+            if (true) {
                 //Conectou ao dispositivo corretamente;
                 SplashScreen.setVisible(false);
                 SplashScreen = null;
@@ -85,9 +121,12 @@ public class MoveMente {
         Color botoes = new java.awt.Color(188, 188, 188);
         javax.swing.UIManager.put("nimbusBase", botoes);
         javax.swing.UIManager.put("nimbusBlueGrey", botoes);
-        javax.swing.UIManager.put("control",  java.awt.Color.white);//new java.awt.Color(240,245,255));//new java.awt.Color(255, 247, 235));
+        javax.swing.UIManager.put("control", java.awt.Color.white);//new java.awt.Color(240,245,255));//new java.awt.Color(255, 247, 235));
     }
 
+    /**
+     * Configura os formulários principais do aplicativo.
+     */
     private static void ConfigurarFormularios() {
         SplashScreen = new FrmSplashScreen();
         // As bordas abaixo são utilizadas como padrão para alterar o layout dos botões do formulário,
