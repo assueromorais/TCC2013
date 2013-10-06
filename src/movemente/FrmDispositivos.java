@@ -450,11 +450,11 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
         if (booMotorLigado) {
             //EnviarComando("motor:desligar");
             EnviarComando("A");
-            System.out.println("motor:desligar");
+            System.out.println("Subir leito.");
         } else {
             //EnviarComando("motor:ligar");
             EnviarComando("P");
-            System.out.println("motor:ligar");
+            System.out.println("Descer leito.");
         }
 
     }//GEN-LAST:event_btnLeitoSubirActionPerformed
@@ -482,7 +482,7 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
 
     private void btnSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimActionPerformed
         // TODO add your handling code here:
-        controladorFala.ControladorFala.EmitirSom();
+        controladorFala.ControladorFala.Sim();
     }//GEN-LAST:event_btnSimActionPerformed
 
     private void btnDorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDorActionPerformed
