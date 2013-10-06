@@ -127,7 +127,7 @@ public class MoveMente {
     /**
      * Configura os formulários principais do aplicativo.
      */
-    private static void ConfigurarFormularios() {
+    private static void ConfigurarFormularios() throws IOException {
         SplashScreen = new FrmSplashScreen();
         // As bordas abaixo são utilizadas como padrão para alterar o layout dos botões do formulário,
         // permitindo que, ao receber o foco o botão receba uma borda, e ao perder o foco ele volte ao normla.
