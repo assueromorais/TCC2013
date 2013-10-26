@@ -41,12 +41,6 @@ public class PortaSerial {
         int len = -1;
         String result = "";
         try {
-            /**
-             * if (_input.available() > 0) { while ((len =
-             * _input.read(readBuffer)) > -1) { result += new String(readBuffer,
-             * 0, len); } }
-            *
-             */
             int availableBytes = _input.available();
             if (availableBytes > 0) { // Read the serial port 
                 _input.read(readBuffer, 0, availableBytes);

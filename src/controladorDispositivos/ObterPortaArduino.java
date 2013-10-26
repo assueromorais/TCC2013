@@ -50,13 +50,12 @@ public class ObterPortaArduino {
         } else {
             CommPort commPort;
             try {
-                commPort = portIdentifier.open("Testando porta arduino", 2000);
+                commPort = portIdentifier.open("MoveMenteControlador", 2000);
                 if (commPort instanceof SerialPort) {
                     serialPort = (SerialPort) commPort;
-                    serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                    serialPort.setSerialPortParams(38400, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
                     input = serialPort.getInputStream();
                     output = serialPort.getOutputStream();
-
                 } else {
                     System.out.println("Erro: Somente portas seriais podem ser utilizadas para esta conexão.");
                 }
@@ -75,8 +74,6 @@ public class ObterPortaArduino {
                 // Define um tempo limite para esperar a resposta do dispositivo.
                 // o tempo limite é necessário para evitar que o aplicativo espere indefinidamente pela resposta
                 String resposta;
-                Thread.sleep(1500);
-                //while (dtTimeout.getTime() < (new Date().getTime())) {
                 System.out.println("Aguardando resposta na porta " + strPortaCom + ".");
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.SECOND, 5);
@@ -84,7 +81,7 @@ public class ObterPortaArduino {
                 do {
                     output.write("0".getBytes());
                     output.flush();
-                    output.close();
+                    Thread.sleep(1250);
                     resposta = util.PortaSerial.LerPortaSerial(input);
                     if ((resposta != null && !resposta.equals("") && resposta.contains("1"))) {
                         // O dispositivo respondeu ao comando
@@ -96,9 +93,8 @@ public class ObterPortaArduino {
                         return true;
                     };
                 } while (util.Data.DiferencaEmSegundos(new Date(), dataInicio) > 0);
-                output.write("A".getBytes());
                 output.close();
-                Thread.sleep(2000);
+                Thread.sleep(100);
                 serialPort.close();
             } catch (IOException ex) {
                 Logger.getLogger(ControladorDispositivos.class.getName()).log(Level.SEVERE, null, ex);

@@ -17,7 +17,9 @@ public class ObterPortaMindwave {
         boolean booAtivo = false; // Booleano que identificará se foi identificado a porta COM
         String strPortaUsada = ""; // String que conterá a porta COM de comunicação do Headset
         ArrayList<String> mstrInversaoCOM = util.PortaSerial.ObterListaPortasAtivas(); // Vetor para portas COM
-        int intIdConexao = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
+        System.out.println("Gerando conexão...");
+        int intIdConexao  = 0;//ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
+        intIdConexao  = ThinkGear.GetNewConnectionId();  // Obtém um Código da conexão aleatório
         System.out.println("Procurando Headset...");
         System.out.println(mstrInversaoCOM.size() + " porta(s) encontrada(s).");
 

@@ -23,7 +23,6 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
 
     private static boolean booLampadaLigada = false;
     private static boolean booCampainhaLigada = false;
-    private static boolean booMotorLigado = false;
     /**
      * Objeto responsável por alterar o foco para o próximo item da tela.
      */
@@ -393,10 +392,8 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
         booLampadaLigada = !booLampadaLigada;
         if (booLampadaLigada) {
             EnviarComando("L");
-            System.out.println("lampada:ligar");
         } else {
             EnviarComando("D");
-            System.out.println("lampada:desligar");
         }
         btnLampada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/lampada_" + ((booLampadaLigada) ? "lig" : "desl") + "128.png")));
     }//GEN-LAST:event_btnLampadaActionPerformed
@@ -404,13 +401,7 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
     private void btnCampainhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCampainhaActionPerformed
         // TODO add your handling code here:
         booCampainhaLigada = !booCampainhaLigada;
-        if (booCampainhaLigada) {
-            EnviarComando("S");
-            System.out.println("campainha:ligar");
-        } else {
-            EnviarComando("S");
-            System.out.println("campainha:desligar");
-        }
+        EnviarComando("C");
         btnCampainha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/campainha_" + ((booCampainhaLigada) ? "lig" : "desl") + ".png")));
         crnBotao.Iniciar();
     }//GEN-LAST:event_btnCampainhaActionPerformed
@@ -430,33 +421,14 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
 
     private void btnLeitoDescerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeitoDescerActionPerformed
         // TODO add your handling code here:
-        booMotorLigado = !booMotorLigado;
         btnLeitoDescer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/descer.png")));
-        if (booMotorLigado) {
-            //EnviarComando("motor:desligar");
-            EnviarComando("A");
-            System.out.println("motor:desligar");
-        } else {
-            //EnviarComando("motor:ligar");
-            EnviarComando("P");
-            System.out.println("motor:ligar");
-        }
+        EnviarComando("A");
     }//GEN-LAST:event_btnLeitoDescerActionPerformed
 
     private void btnLeitoSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeitoSubirActionPerformed
         // TODO add your handling code here:
-        booMotorLigado = !booMotorLigado;
         btnLeitoSubir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/subir.png")));
-        if (booMotorLigado) {
-            //EnviarComando("motor:desligar");
-            EnviarComando("A");
-            System.out.println("Subir leito.");
-        } else {
-            //EnviarComando("motor:ligar");
-            EnviarComando("P");
-            System.out.println("Descer leito.");
-        }
-
+        EnviarComando("H");
     }//GEN-LAST:event_btnLeitoSubirActionPerformed
 
     private void btnFalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFalaActionPerformed
@@ -563,6 +535,7 @@ public class FrmDispositivos extends javax.swing.JInternalFrame implements iGera
     public void IntervaloOcorreu(CronometroEvento evt) {
         booCampainhaLigada = !booCampainhaLigada;
         btnCampainha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/movemente/Imagens/campainha_desl.png")));
+        EnviarComando("E");
         crnBotao.Parar();
     }
 }

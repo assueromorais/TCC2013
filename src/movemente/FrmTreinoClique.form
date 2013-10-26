@@ -46,7 +46,7 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblReiniciarTreino" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="509" max="32767" attributes="0"/>
                               <Component id="btnProsseguir" min="-2" pref="162" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -70,7 +70,7 @@
               <Component id="lblExplicativo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" pref="127" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="162" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblReiniciarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnProsseguir" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -114,7 +114,7 @@
           <Font name="Arial" size="36" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Para mudar o foco de um bot&#xe3;o para outro, &lt;br/&gt;basta piscar o olho com for&#xe7;a uma vez em um intervalo de 3 segundos.&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Para clicar em um bot&#xe3;o, basta piscar o olho com for&#xe7;a&lt;br/&gt; duas vezes em um intervalo de 1,4 segundos.&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

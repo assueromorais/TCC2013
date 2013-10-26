@@ -17,6 +17,7 @@ public class DisparadorComando implements Runnable {
 
     private String _strComando;
     private OutputStream _output;
+    
     /**
      *
      */
@@ -33,15 +34,17 @@ public class DisparadorComando implements Runnable {
     }
 
     /**
+     * 
      */
     @Override
     public void run() {
         try {
-            _output.write(_strComando.getBytes());
-            _output.close();
+           _output.write(_strComando.getBytes());
+           Thread.sleep(10);
         } catch (IOException ex) {
-            Logger.getLogger("Falha");
             Logger.getLogger(ControladorDispositivos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DisparadorComando.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

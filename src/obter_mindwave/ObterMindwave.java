@@ -56,7 +56,10 @@ public class ObterMindwave implements iGeradorComandos, Runnable {
         try {
             strCOM = ObterPortaMindwave.ObterPorta();
         } catch (InterruptedException ex) {
+            System.out.println("Falha ao obter portas.");
             Logger.getLogger(ObterMindwave.class.getName()).log(Level.SEVERE, null, ex);
+            booParar = true;
+            return false;
         }
         if ("_".equals(strCOM) || "".equals(strCOM)) {
             booParar = true;

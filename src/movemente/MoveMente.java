@@ -99,8 +99,8 @@ public class MoveMente {
      */
     public static void IniciarConexaoArduino() {
         if (Controlador != null) {
-            //if (Controlador.Conectar()) {
-            if (true) {
+            if (Controlador.Conectar()) {
+           // if (true) {
                 //Conectou ao dispositivo corretamente;
                 SplashScreen.setVisible(false);
                 SplashScreen = null;
