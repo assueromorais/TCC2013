@@ -27,7 +27,7 @@ public final class ControladorDispositivos implements iControladorDispositivos {
      * Porta atualmente utilizada para conectar ao dispositivo.
      */
     private SerialPort serialPort;
-    private String PortaCom = "COM7";
+    private String PortaCom = "COM9";
     /**
      * Strem para envio de dados para o controlador.
      */
@@ -54,7 +54,7 @@ public final class ControladorDispositivos implements iControladorDispositivos {
      */
     @Override
     public boolean Conectar() {
-        PortaCom = "COM7";//ObterPortaArduino.ObterPorta();
+        PortaCom = ObterPortaArduino.ObterPorta();
         if (!PortaCom.equals("")) {
             CommPortIdentifier portIdentifier = null;
             try {
@@ -68,10 +68,10 @@ public final class ControladorDispositivos implements iControladorDispositivos {
             } else {
                 CommPort commPort;
                 try {
-                    commPort = portIdentifier.open(this.getClass().getName(), 2000);
+                    commPort = portIdentifier.open("MoveMenteControlador",  2000);
                     if (commPort instanceof SerialPort) {
                         serialPort = (SerialPort) commPort;
-                        serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                        serialPort.setSerialPortParams(38400, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
                         input = serialPort.getInputStream();
                         output = serialPort.getOutputStream();
                         return true;
